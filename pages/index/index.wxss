@@ -1,0 +1,129 @@
+/**index.wxss**/
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.flex-wrp {
+  margin: 0 auto;
+  display: flex;
+  
+}
+
+.flex-item {
+  width: 350rpx;
+  height: 500rpx;
+  font-size: 26rpx;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  flex-direction:row;
+ }
+.flex-wrp-top{
+  margin-top: 10rpx;
+  display:flex;
+}
+.flex-item-top{
+  width: 200rpx;
+  height: 60rpx;
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+  flex-direction:row;
+  text-align: center;
+
+}
+.flex-item-V {
+  margin: 0 auto;
+  width: 350rpx;
+  height: 480rpx;
+  text-align: center;
+  flex-direction:column;
+  margin-bottom: 20rpx;
+  display: flex;
+}
+
+.bc_green {
+  background-color: green;
+  box-shadow:6rpx 6rpx 6rpx 6rpx lightgray;
+  border-radius: 5px;
+  margin-bottom: 20rpx;
+  border: 2rpx solid lightgray;
+
+}
+
+.bc_gray {
+  background-color: gray;
+}
+
+.bc_blue {
+  background-color: blue;
+}
+
+.bc_red {
+   background-color: red;
+}
+
+.bc_blackishgreen{
+  background-color: #009698;
+}
+
+.demo-text {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 36rpx;
+}
+
+
+
+.hd {  
+  content: "";  
+  height: 16rpx;  
+  width: 16rpx;  
+  border-width: 4rpx 4rpx 0 0;  
+  border-color: red;  
+  border-style: solid;  
+  transform: rotate(-45deg);  
+  position: absolute;  
+  top: 20rpx;  
+  left: 30rpx;  
+} 
+
+.image_frame {
+  width: auto;
+  height: 600rpx;
+  border-radius: 5px;
+  margin-bottom: 10rpx;
+}
+
+.top-frame {
+  width: 50%;
+  height: 50rpx;
+  font-size: 48rpx;
+  text-align: center;
+  border-radius: 3px;
+  flex-direction:row;
+  margin:  auto;
+  display: flex;
+  margin-bottom: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}

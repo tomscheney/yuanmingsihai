@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/orderinfo/orderInfo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "缘茗四海",
+    "navigationBarTextStyle": "black"
+  }
+}
