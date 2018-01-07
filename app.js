@@ -2,6 +2,8 @@
 
 var Bmob = require('utils/bmob.js');
 Bmob.initialize("97d353af489136a32c44834a9c27267f", "d695b05371f27727e99f68c2ab98475e");
+var APP_ID = 'wxd339da91bf1b1fe3';
+var APP_SECRECT = '97d353af489136a32c44834a9c27267f';
 
 App({
   onLaunch: function () {
@@ -9,12 +11,45 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    console.log('onLaunch')
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
+        console.log('resCode:', res.code)        
+        if (res.code) {
+          //发起网络请求
+          Bmob.User.requestOpenId(res.code, {
+            success: function (result) {
+              // that.setData({
+              //   loading: true,
+              //   url: result.openid
+              // })
+              console.log('result', result)
+              var openid = result.openid;
+              //指定用户，跳转激活页面
+              // if (openid == "odW8G0Yyaew3eZk6SZeYB_uSPKxI") {
+                wx.redirectTo({
+                  url: "/pages/activatedCard/activatedCard",
+                })
+              // }
+            },
+            error: function (error) {
+              // Show the error message somewhere
+              console.log("Error: " + error.code + " " + error.message);
+            }
+          });
+
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+          common.showTip('获取用户登录态失败！', 'loading');
+        }
+      },
+      fail:function(error){
+        console.log("login error",error);
+      },
+
+      
     })
     // 获取用户信息
     wx.getSetting({

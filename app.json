@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/orderinfo/orderInfo"
+    "pages/orderinfo/orderInfo",
+    "pages/activatedCard/activatedCard",
+    "pages/code/code"
   ],
   "window": {
     "backgroundTextStyle": "light",

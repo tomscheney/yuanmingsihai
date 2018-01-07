@@ -6,15 +6,16 @@
 
 <view class="section">
   <view class="flex-wrp" style="flex-direction:row;" >
-    <view class="top-frame bc_blackishgreen demo-text">500元档</view>
     <view class="top-frame bc_blackishgreen demo-text">1000元档</view>
+    <view class="top-frame bc_blackishgreen demo-text">2000元档</view>
+    <view class="top-frame bc_blackishgreen demo-text">3000元档</view>
 
   </view>
 </view>
 
-<view class='flex-wrp ' wx:for="{{pruductArray}}">
+<view class='flex-wrp ' wx:for="{{pruductArray}}" wx:key='a'>
   <!--纵向布局  -->
-  <view class='flex-item' wx:for='{{item}}'>
+  <view class='flex-item' wx:for='{{item}}' wx:key='b'>
     <!--横向布局  -->
 
     <!--视图内部纵向布局  -->

@@ -22,7 +22,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "just do it",
+					"pathName": "pages/index/index",
+					"query": "query=10001111",
+					"scene": "1011"
+				}
+			]
 		}
 	}
 }

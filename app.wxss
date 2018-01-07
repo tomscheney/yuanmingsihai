@@ -1,4 +1,10 @@
 /**app.wxss**/
+page {
+  background-color: #F8F8F8;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+}
 .container {
   height: 100%;
   display: flex;
@@ -8,3 +14,14 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.weui-mask {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+@import 'style/weui.wxss';
