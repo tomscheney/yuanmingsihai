@@ -17,7 +17,8 @@
   </view>
 
   <view class="bottom">
-    <button bindtap="bindSkipButtun"> 进入主界面 </button>
+    <button type="default" size="default"
+ bindtap="bindSkipButtun"> 进入主界面 </button>
   </view>
 
 </view>

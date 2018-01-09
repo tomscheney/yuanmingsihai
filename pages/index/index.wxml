@@ -3,17 +3,12 @@
 <!-- <view class='top-frame' style='flex-direction:row' wx:for="{{['500元档','1000元档']}}">
      <view class='bg_gray demo-text-2'>{{item}} </view>
 </view> -->
-
-<view class="section">
-  <view class="flex-wrp" style="flex-direction:row;" >
-    <view class="top-frame bc_blackishgreen demo-text">1000元档</view>
-    <view class="top-frame bc_blackishgreen demo-text">2000元档</view>
-    <view class="top-frame bc_blackishgreen demo-text">3000元档</view>
-
-  </view>
+<view class="flex-top"  >
+  <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top'>{{item}}</view>
 </view>
 
-<view class='flex-wrp ' wx:for="{{pruductArray}}" wx:key='a'>
+
+<view class='flex-wrp ' style='margin-top:15px' wx:for="{{pruductArray}}" wx:key='a'>
   <!--纵向布局  -->
   <view class='flex-item' wx:for='{{item}}' wx:key='b'>
     <!--横向布局  -->
@@ -21,7 +16,7 @@
     <!--视图内部纵向布局  -->
     <view class='flex-item-V bc_green' bindtap='bindViewTap'>
 
-      <image class='image_frame' mode='aspectFill' src='http://bmob-cdn-15679.b0.upaiyun.com/2017/12/25/e623b4e54025556480fe8f7445c357a7.jpg' >
+      <image class='image_frame' mode='aspectFill' src='http://bmob-cdn-15679.b0.upaiyun.com/2017/12/25/e623b4e54025556480fe8f7445c357a7.jpg'>
 
       </image>
 
