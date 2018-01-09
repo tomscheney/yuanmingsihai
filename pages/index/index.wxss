@@ -97,8 +97,9 @@
   font-size: 14px;
   text-align: center;
   width: 50px;
+  height: 38px;
+  line-height: 38px;
   border-bottom: 2px solid #C49A27;
-
 }
 .flex-top {
   display: flex;
