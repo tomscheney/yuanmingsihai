@@ -6,18 +6,19 @@
     <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
-  <view class="card">
-    <button class='card-code' bindtap="bindGenerateCode"> 生成卡片二维码 </button>
-    <button class='card-activate' open-type="getUserInfo" bindgetuserinfo="bindActivatedCard"> 激活卡片 </button>
-  </view>
   
-  <view class="card" wx:if="{{cardNO}}">
-    <text class="card-No">卡号:{{cardNO}}</text>
-    <text class="card-balance">余额:{{balance}}</text>
+  
+  <view class="card-info" wx:if="{{cardNO}}">
+    <text class="card-No">卡号 {{cardNO}}</text>
+    <text class="card-balance">余额  ¥{{balance}}</text>
   </view>
 
-  <view class="bottom">
-    <button bindtap="bindSkipButtun"> 进入主界面 </button>
+  <view class="card-button">
+    <button class='card-code' bindtap="bindGenerateCode"> 生成卡片二维码 </button>
+    <button class='card-activate' open-type="getUserInfo" bindgetuserinfo="bindActivatedCard"> 激活礼品卡 </button>
+    <button class='card-goHome' bindtap="bindSkipButtun"> 进入主界面 </button>
+    
   </view>
+
 
 </view>

@@ -4,16 +4,11 @@
      <view class='bg_gray demo-text-2'>{{item}} </view>
 </view> -->
 
-<view class="section">
-  <view class="flex-wrp" style="flex-direction:row;" >
-    <view class="top-frame bc_blackishgreen demo-text">1000元档</view>
-    <view class="top-frame bc_blackishgreen demo-text">2000元档</view>
-    <view class="top-frame bc_blackishgreen demo-text">3000元档</view>
-
-  </view>
+<view class="flex-top" style='height:45px' wx:for="{{pricerGrade}}" wx:key='top'>
+  <button>{{item}}</button>
 </view>
 
-<view class='flex-wrp ' wx:for="{{pruductArray}}" wx:key='a'>
+<view class='flex-wrp' style='margin-top:15px' wx:for="{{pruductArray}}" wx:key='a'>
   <!--纵向布局  -->
   <view class='flex-item' wx:for='{{item}}' wx:key='b'>
     <!--横向布局  -->

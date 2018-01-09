@@ -12,38 +12,66 @@
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
+  margin-top: 95rpx;
 }
 
 .userinfo-nickname {
   color: #aaa;
 }
 
-.card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-   margin-top: 50px;
-}
-.card-code{
-  margin-top: 20px;
-}
-
-.card-activate{
-  margin-top: 20px;
-  
+.card-info{
+  display: flex;  
+  flex-direction: column;  
+  align-items: left;
+  margin-top: 30px;
+  background: #F4F4F4;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .card-No{
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: 70px;
 
 }
 .card-balance{
   margin-top: 20px;
+  margin-bottom: 60rpx;
+  margin-left: 70px;
+
 }
-.bottom{
-  display: flex;
+
+.card-button{
   flex-direction: column;
   align-items: center;
-   margin-top: 60px;
+  margin-top: 40px;
+}
+
+.card-code{
+  margin-top: 20px;
+  margin-left: 85rpx;
+  margin-right: 85rpx;
+  border-radius: 25px;
+  border: #CEAF6C solid 1px;
+  background: white;
+}
+
+.card-activate{
+  margin-top: 20px;
+  margin-left: 85rpx;
+  margin-right: 85rpx;
+  background: #CEAF6C;
+  border-radius: 25px;
+  
+  
+}
+
+.card-goHome{
+  margin-top: 20px;
+  margin-left: 85rpx;
+  margin-right: 85rpx;
+  border-radius: 25px; 
+  background: white;
+  border: #CEAF6C solid 1px;
+  
 }

@@ -11,12 +11,13 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    console.log('onLaunch')
+    var that = this;
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('resCode:', res.code)        
+        console.log('resCode:', res) 
+
         if (res.code) {
           //发起网络请求
           Bmob.User.requestOpenId(res.code, {
@@ -29,10 +30,31 @@ App({
               var openid = result.openid;
               //指定用户，跳转激活页面
               // if (openid == "odW8G0Yyaew3eZk6SZeYB_uSPKxI") {
-                wx.redirectTo({
-                  url: "/pages/activatedCard/activatedCard",
-                })
+              //   wx.redirectTo({
+              //     url: "/pages/activatedCard/activatedCard",
+              //   })
               // }
+
+               if(openid){
+                 var User = Bmob.Object.extend("_User");
+                 var user = new User();
+                 user.set("openid", openid);
+                 var username = that.globalData.userInfo["nickName"];
+                 user.set("username", username);
+                 user.set("password","111111");
+                 //添加数据，第一个入口参数是null
+                 user.save(null, {
+                   success: function (result) {
+                     // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                     console.log("创建成功, objectId:" + result);
+                   },
+                   error: function (result, error) {
+                     // 添加失败
+                     console.log('创建失败',error);
+                   }
+                 });
+               }
+
             },
             error: function (error) {
               // Show the error message somewhere
@@ -60,6 +82,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
+              console.log('userInfo', res.userInfo)
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
