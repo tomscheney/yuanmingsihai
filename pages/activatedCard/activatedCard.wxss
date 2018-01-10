@@ -54,6 +54,8 @@
   border-radius: 25px;
   border: #CEAF6C solid 1px;
   background: white;
+  color: #CEAF6C;
+  font-size: 16px;
 }
 
 .card-activate{
@@ -62,8 +64,8 @@
   margin-right: 85rpx;
   background: #CEAF6C;
   border-radius: 25px;
-  
-  
+  color: #fff;
+  font-size: 16px;
 }
 
 .card-goHome{
@@ -73,5 +75,6 @@
   border-radius: 25px; 
   background: white;
   border: #CEAF6C solid 1px;
-  
+  color: #CEAF6C;
+  font-size: 16px;
 }

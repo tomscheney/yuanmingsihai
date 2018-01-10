@@ -7,12 +7,12 @@
 
 .flex-item {
   width: 350rpx;
-  height: 500rpx;
+  height: 480rpx;
   font-size: 26rpx;
   margin: 0 auto;
   text-align: center;
-  border-radius: 5px;
   flex-direction:row;
+  background: #F4F4F4;
  }
 
 .flex-item-V {
@@ -25,30 +25,12 @@
   display: flex;
 }
 
-.bc_green {
-  background-color: green;
-  box-shadow:6rpx 6rpx 6rpx 6rpx lightgray;
-  border-radius: 5px;
-  margin-bottom: 20rpx;
-  border: 2rpx solid lightgray;
-
-}
-
-.product-text {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-size: 36rpx;
-} 
-
 .image_frame {
   width: auto;
   height: 600rpx;
-  border-radius: 5px;
-  margin-bottom: 10rpx;
+  margin-left: 5px;
+  margin-right: 5px;
 }
-
 
 .flex-top {
   display: flex;
@@ -77,3 +59,31 @@
   border-radius: 1px;
   margin-top: -2px;
 }
+
+.breif-text{
+  background: #F0ECE1 ;
+  font-size: 12px;
+  height: 33px;
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #A58747;
+  text-indent: 5px;
+  
+}
+
+.product-text {
+  color: #333;
+  font-size: 15px;
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 5px;
+} 
+
+.product-price {
+  color: #C90B0B;
+  font-size: 14px;
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 5px;
+} 

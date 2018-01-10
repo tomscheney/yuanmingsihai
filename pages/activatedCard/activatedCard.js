@@ -58,15 +58,15 @@ Page({
         //此处拦截了设置请求
         if (value == true) {
 
-          var Diary = Bmob.Object.extend("card");
-          var diary = new Diary();
+          var Card = Bmob.Object.extend("Card");
+          var card = new Card();
           console.log('卡号', that.data.cardNO);
           console.log('余额', that.data.balance);
 
-          diary.set("cardNO", that.data.cardNO);
-          diary.set("balance", that.data.balance);
+          card.set("cardNO", that.data.cardNO);
+          card.set("balance", that.data.balance);
           //添加数据，第一个入口参数是null
-          diary.save(null, {
+          card.save(null, {
             success: function (result) {
               // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
               console.log("创建成功, objectId:" + result);
@@ -115,16 +115,17 @@ Page({
           });
 
           var that = this;
-          var Diary = Bmob.Object.extend("card");
+          var Card = Bmob.Object.extend("Card");
           //创建查询对象，入口参数是对象类的实例
-          var query = new Bmob.Query(Diary);
+          var card = new Bmob.Query(Card);
           //查询单条数据，第一个参数是这条数据的objectId值
-          query.equalTo("cardNO", cardNO);
-          query.first({
+          card.equalTo("cardNO", cardNO);
+          card.first({
             success: function (result) {
               // 查询成功，不需要添加
-              console.log("查询成功:", result);
               if (result) {
+                console.log("查询成功:", result);
+
                 that.setData({
                   balance:result.get('balance'),
                 });
@@ -134,7 +135,7 @@ Page({
                 that.setData({
                   needAdd: true,
                 });
-                console.log("查询成功: 我走着");
+                console.log("查询失败: 我走着");
 
               }
             },

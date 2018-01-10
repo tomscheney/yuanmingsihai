@@ -12,6 +12,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     var that = this;
+
     // 登录
     wx.login({
       success: res => {
@@ -36,13 +37,10 @@ App({
                 // })
               // }
 
-               if(openid){
-                 var User = Bmob.Object.extend("_User");
+              if (openid){
+                 var User = Bmob.Object.extend("user");
                  var user = new User();
                  user.set("openid", openid);
-                 var username = that.globalData.userInfo["nickName"];
-                 user.set("username", username);
-                 user.set("password","111111");
                  //添加数据，第一个入口参数是null
                  user.save(null, {
                    success: function (result) {
