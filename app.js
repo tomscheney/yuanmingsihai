@@ -31,6 +31,9 @@ App({
               //指定用户，跳转激活页面
               // if (openid == "odW8G0Yyaew3eZk6SZeYB_uSPKxI") {
 
+                // wx.redirectTo({
+                //   url: "/pages/activatedCard/activatedCard",
+                // })
               // }
 
                if(openid){

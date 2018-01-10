@@ -1,11 +1,11 @@
 <!--index.wxml-->
 
-<!-- <view class='top-frame' style='flex-direction:row' wx:for="{{['500元档','1000元档']}}">
-     <view class='bg_gray demo-text-2'>{{item}} </view>
-</view> -->
 
 <view class="flex-top"  >
-  <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top'>{{item}}</view>
+  <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top' >
+  <view bindtap='selectPriceGrade' data-index='{{index}}'>{{item}}</view>
+  <view class='top-line' wx:if="{{index == selectIndex}}" ></view>
+  </view>
 </view>
 
 
@@ -20,7 +20,6 @@
       <image class='image_frame' mode='aspectFill' src='http://bmob-cdn-15679.b0.upaiyun.com/2017/12/25/e623b4e54025556480fe8f7445c357a7.jpg'>
 
       </image>
-
       <text class='product-text'>{{item.productName}}</text>
       <text class='demo-text'>{{item.productDescription}}</text>
     </view>
