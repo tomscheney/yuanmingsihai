@@ -126,7 +126,7 @@ Page({
               console.log("查询成功:", result);
               if (result) {
                 that.setData({
-                  balance: '余额:' + result.get('balance'),
+                  balance:result.get('balance'),
                 });
               } else {
                 console.log("cardNO", that.data.cardNO);

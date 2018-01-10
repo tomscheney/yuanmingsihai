@@ -18,6 +18,7 @@
     <button class='card-activate' open-type="getUserInfo" bindgetuserinfo="bindActivatedCard"> 激活礼品卡 </button>
     <button class='card-goHome' bindtap="bindSkipButtun"> 进入主界面 </button>
     
+
   </view>
 
 
