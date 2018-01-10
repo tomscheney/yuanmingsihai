@@ -1,18 +1,20 @@
 /**index.wxss**/
 
 .flex-wrp {
-  margin: 0 auto;
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .flex-item {
-  width: 350rpx;
+  width: 50%;
   height: 480rpx;
-  font-size: 26rpx;
-  margin: 0 auto;
-  text-align: center;
+  font-size: 26rpx;  
   flex-direction:row;
   background: #F4F4F4;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
  }
 
 .flex-item-V {
@@ -30,6 +32,7 @@
   height: 600rpx;
   margin-left: 5px;
   margin-right: 5px;
+  margin-top: 5px;
 }
 
 .flex-top {

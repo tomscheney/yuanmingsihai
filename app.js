@@ -12,7 +12,9 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     var that = this;
-
+    var openid = '';
+    var username = '';
+    var gender = '';
     // 登录
     wx.login({
       success: res => {
@@ -28,7 +30,7 @@ App({
               //   url: result.openid
               // })
               console.log('result', result)
-              var openid = result.openid;
+              openid = result.openid;
               //指定用户，跳转激活页面
               // if (openid == "odW8G0Yyaew3eZk6SZeYB_uSPKxI") {
 
@@ -37,10 +39,12 @@ App({
                 // })
               // }
 
-              if (openid){
+              if (openid && username){
                  var User = Bmob.Object.extend("user");
                  var user = new User();
                  user.set("openid", openid);
+                 user.set("username",username);
+                 user.set("gender",gender);
                  //添加数据，第一个入口参数是null
                  user.save(null, {
                    success: function (result) {
@@ -88,6 +92,29 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+              username = res.userInfo['nickName'];
+              gender = res.userInfo['gender'];
+             //将用户信息添加到数据库的对应表
+              if (openid && username) {
+                var User = Bmob.Object.extend("user");
+                var user = new User();
+                user.set("openid", openid);
+                user.set("username", username);
+                user.set("gender",);
+                //添加数据，第一个入口参数是null
+                user.save(null, {
+                  success: function (result) {
+                    // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                    console.log("创建成功, objectId:" + result);
+                  },
+                  error: function (result, error) {
+                    // 添加失败
+                    console.log('创建失败', error);
+                  }
+                });
+              }
+
+
             }
           })
         }

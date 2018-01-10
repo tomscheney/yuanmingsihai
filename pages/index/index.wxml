@@ -9,7 +9,7 @@
 </view>
 
 
-<view class='flex-wrp ' style='margin-top:15px' wx:for="{{pruducts}}" wx:key='a'>
+<view class='flex-wrp ' style='margin-top:15px' wx:for="{{products}}" wx:key='a'>
   <!--纵向布局  -->
   <view class='flex-item' wx:for='{{item}}' wx:key='b'>
     <!--横向布局  -->
@@ -17,14 +17,13 @@
     <!--视图内部纵向布局  -->
     <view class='flex-item-V ' bindtap='bindViewTap'>
 
-      <image class='image_frame' mode='aspectFill' src='http://bmob-cdn-15679.b0.upaiyun.com/2017/12/25/e623b4e54025556480fe8f7445c357a7.jpg'>
+      <image class='image_frame' mode='aspectFill' src='{{item.coverUrl}}'>
 
       </image>
       <text class='breif-text'>{{item.description}}</text>
 
       <text class='product-text'>{{item.name}}</text>
-      <text class='product-price'>¥{{item.price}}1000</text>
+      <text class='product-price'>¥{{selectIndex * 2 + 1}}000</text>
     </view>
-
   </view>
 </view>
