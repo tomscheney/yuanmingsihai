@@ -32,13 +32,12 @@ App({
               console.log('result', result)
               openid = result.openid;
               //指定用户，跳转激活页面
-              // if (openid == "odW8G0Yyaew3eZk6SZeYB_uSPKxI") {
+              if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
 
-                // wx.redirectTo({
-                //   url: "/pages/activatedCard/activatedCard",
-                // })
-              // }
-
+                wx.redirectTo({
+                  url: "/pages/activatedCard/activatedCard",
+                })
+              }
               if (openid && username){
                  var User = Bmob.Object.extend("user");
                  var user = new User();
