@@ -57,6 +57,7 @@
   font-size: 18px;
   text-align: center;
   margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 .introduce-cell{
@@ -64,7 +65,8 @@
   flex-direction: row;
   border-bottom: 0.5rpx solid #F0F0F0;
   width: 100%;
-  margin-top: 15px;
+  height: 35px;
+  line-height: 35px;
 }
 
 .cell-head{
