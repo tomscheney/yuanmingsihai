@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/orderinfo/orderInfo",
     "pages/activatedCard/activatedCard",
-    "pages/code/code"
+    "pages/code/code",
+    "pages/shopcart/shopcart"
   ],
   "window": {
     "backgroundTextStyle": "light",

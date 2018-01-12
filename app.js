@@ -7,6 +7,7 @@ var APP_SECRECT = '97d353af489136a32c44834a9c27267f';
 
 App({
   onLaunch: function () {
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -114,14 +115,23 @@ App({
                 });
               }
 
-
             }
           })
         }
       }
     })
   },
+
+  onShow:function(){
+    var f = this.globalData.shopbadge;
+   f++;
+   this.globalData.shopbadge = f;
+   console.log('ccccc:',f);
+  },
+
   globalData: {
-    userInfo: null
+    userInfo: null,
+    shopbadge:100,
+    hello:0,
   }
 })

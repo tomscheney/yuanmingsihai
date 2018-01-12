@@ -1,9 +1,4 @@
-// pages/orderinfo/orderInfo.js
-
-
-const app = getApp()
-
-
+// pages/shopcart.js
 Page({
 
   /**
@@ -17,28 +12,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options:",options);
-    // var count = getApp().globalData.shopbadge;
-    // count++;
-
-    console.log("count:", app.globalData.shopbadge);
-
+  
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
-    // count += 1;
-    // app.globalData.iconbadge += count;
+  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+  
   },
 
   /**
