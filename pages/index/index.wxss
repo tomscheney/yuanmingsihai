@@ -9,20 +9,20 @@
 .flex-item {
   width: 50%;
   height: 480rpx;
-  font-size: 26rpx;  
-  flex-direction:row;
-  background: #F4F4F4;
+  font-size: 26rpx;
+  flex-direction: row;
+  background: #f4f4f4;
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
- }
+}
 
 .flex-item-V {
   margin: 0 auto;
   width: 350rpx;
   height: 480rpx;
   text-align: center;
-  flex-direction:column;
+  flex-direction: column;
   margin-bottom: 20rpx;
   display: flex;
 }
@@ -38,9 +38,9 @@
 .flex-top {
   display: flex;
   height: 40px;
-  align-items: center; 
+  align-items: center;
   justify-content: space-around;
-  box-shadow: 0px 0px 1px 1px #E4E4E4;
+  box-shadow: 0px 0px 1px 1px #e4e4e4;
   background: white;
   margin: 1px;
 }
@@ -52,10 +52,11 @@
   height: 36px;
   line-height: 38px;
 }
-.top-line{
-  background: #C49A27; 
+
+.top-line {
+  background: #c49a27;
   height: 2px;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   margin-left: 1px;
   margin-right: 1px;
@@ -63,16 +64,15 @@
   margin-top: -2px;
 }
 
-.breif-text{
-  background: #F0ECE1 ;
+.breif-text {
+  background: #f0ece1;
   font-size: 12px;
   height: 33px;
   text-align: left;
   margin-left: 5px;
   margin-right: 5px;
-  color: #A58747;
+  color: #a58747;
   text-indent: 5px;
-  
 }
 
 .product-text {
@@ -81,12 +81,48 @@
   text-align: left;
   margin-left: 5px;
   margin-right: 5px;
-} 
+}
 
 .product-price {
-  color: #C90B0B;
+  color: #c90b0b;
   font-size: 14px;
   text-align: left;
   margin-left: 5px;
   margin-right: 5px;
-} 
+}
+
+.shopcart-section {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 20px;
+  flex: 1;
+  width: 100%;
+  height: 50px;
+  justify-content: flex-end;
+}
+
+.shopcart-button {
+  display: flex;
+  flex-direction: row; 
+  width: 50px;
+  height: 50px;
+  background: #CEAF6C;
+  margin-right: -10px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px 1px lightgray;
+}
+
+.shop-iconbadge{
+  background: #C90B0B;
+  color: white;
+  width: 14px;
+  height: 14px;
+  margin-top: 5px;
+  margin-right: 18px;
+  font-size: 10px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 14px;
+  
+}

@@ -1,10 +1,10 @@
 <!--index.wxml-->
 
 
-<view class="flex-top"  >
-  <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top' >
-  <view bindtap='selectPriceGrade' data-index='{{index}}'>{{item}}</view>
-  <view class='top-line' wx:if="{{index == selectIndex}}" ></view>
+<view class="flex-top">
+  <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top'>
+    <view bindtap='selectPriceGrade' data-index='{{index}}'>{{item}}</view>
+    <view class='top-line' wx:if="{{index == selectIndex}}"></view>
   </view>
 </view>
 
@@ -26,4 +26,10 @@
       <text class='product-price'>¥{{selectIndex * 2 + 1}}000</text>
     </view>
   </view>
+</view>
+
+<view class='shopcart-section' >
+  <image class='shopcart-button' bindtap='bindShopCart'></image>
+  <view class='shop-iconbadge' >{{iconbadge}}</view>
+  
 </view>

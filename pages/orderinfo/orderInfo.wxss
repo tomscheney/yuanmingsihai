@@ -1,1 +1,178 @@
 /* pages/orderinfo/orderInfo.wxss */
+
+@import "../../style/weui.wxss"
+
+.product-image {
+  display: flex;
+  background: #f4f4f4;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image-frame {
+  width: 100%;
+  height: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.product-detail {
+  width: 100%;
+  height: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+  flex-direction: column;
+  display: flex;
+}
+
+.product-name {
+  color: #444;
+  font-size: 18px;
+  font: PingFangSC-Regular;
+}
+
+.product-price {
+  color: #c90b0b;
+  font-size: 20px;
+  font: PingFangSC-Medium;
+}
+
+.introduce {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.introduce-title {
+  color: #444;
+  font: FZQKBYSJW--GB1-0;
+  font-size: 18px;
+  text-align: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.introduce-cell {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 0.5rpx solid #f0f0f0;
+  width: 100%;
+  line-height: 35px;
+}
+
+.cell-head {
+  color: #999;
+  /* margin-left: 0px; */
+  width: 70px;
+  height: 35px;
+  font-size: 14px;
+  font: PingFangSC-Light;
+  white-space: nowrap;
+}
+
+.cell-tail {
+  color: #333;
+  font: PingFangSC-Light;
+  font-size: 14px;
+  text-justify: inter-ideograph;
+  text-align: justify;
+  margin-left: 5px;
+  display: flex;
+}
+
+.detail {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 35px;
+  justify-content: center;
+  align-items: center;
+  display: felx;
+  flex-direction: column;
+}
+
+.detail-image {
+  width: 100%;
+}
+
+.detail-text {
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+   display: felx;
+  flex-direction: column;
+  width: 100%;
+  height: 50px;
+}
+.detail-text-title{
+color: #A58747;
+font-size: 18px;
+font: FZQKBYSJW--GB1-0;
+margin-left: 0px;
+margin-right: 0px;
+width: 100%;
+text-align: center;
+}
+.detail-text-content{
+color: #444;
+font-size: 13px;
+font: FZQKBYSJW--GB1-0;
+width: 100%;
+text-align: center;
+}
+
+.detail-bottom-image{
+   width: 100%;
+   margin-top: 50px;
+}
+.detail-bottom-motto{
+ font: FZQingKeBenYueSongS-R-GB;
+ font-size: 15px;
+ color: #333;
+ text-align: center;
+ width: 100%;
+ margin-bottom: 80px;
+ margin-top: 30px;
+}
+
+.shopcart-section {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0px;
+  flex: 1;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+
+}
+
+.shopcart-addButton{
+ background: #F4F4F4 ;
+ width: 50%;
+ font: PingFangSC-Light;
+ font-size: 15px;
+ color: #444;
+ text-align: center;
+  line-height: 50px; 
+ justify-content: center;
+}
+.shopcart-buy{
+  background: #CEAF6C ;
+ width: 50%;
+ font: PingFangSC-Light;
+ font-size: 15px;
+ color: white;
+ text-align: center;
+  line-height: 50px; 
+ justify-content: center;
+}
+
+

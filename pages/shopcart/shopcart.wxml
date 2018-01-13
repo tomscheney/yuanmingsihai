@@ -1,0 +1,6 @@
+<!--pages/shopcart.wxml-->
+<view class='container'>
+
+<text >购物车</text>
+
+</view>
