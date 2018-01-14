@@ -20,7 +20,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('resCode:', res) 
+        console.log('resCode:', res)
 
         if (res.code) {
           //发起网络请求
@@ -32,7 +32,6 @@ App({
               // })
               console.log('result', result)
               openid = result.openid;
-              that.globalData.openid = openid;
               //指定用户，跳转激活页面
               if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
 
@@ -40,24 +39,32 @@ App({
                   url: "/pages/activatedCard/activatedCard",
                 })
               }
-              if (openid && username){
-                 var User = Bmob.Object.extend("user");
-                 var user = new User();
-                 user.set("openid", openid);
-                 user.set("username",username);
-                 user.set("gender",gender);
-                 //添加数据，第一个入口参数是null
-                 user.save(null, {
-                   success: function (result) {
-                     // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-                     console.log("创建成功, objectId:" + result);
-                   },
-                   error: function (result, error) {
-                     // 添加失败
-                     console.log('创建失败',error);
-                   }
-                 });
-               }
+
+              var User = Bmob.Object.extend("user");
+              var user = new User();
+              user.set("openid", openid);
+              var userInfo = that.globalData.userInfo;
+              if (userInfo) {
+                user.set("username", userInfo['username']);
+                user.set("gender", userInfo['gender']);
+              }
+              //添加数据，第一个入口参数是null
+              user.save(null, {
+                success: function (result) {
+                  // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                  console.log("创建成功, objectId:" + result);
+                },
+                error: function (result, error) {
+                  // 添加失败
+                  console.log('创建失败1111', error);
+                  result.fetchWhenSave(true);
+                  result.set("openid", openid);
+                  user.set("username", username);
+                  user.set("gender", gender);
+                  result.save();
+                }
+              });
+
 
             },
             error: function (error) {
@@ -71,11 +78,11 @@ App({
           common.showTip('获取用户登录态失败！', 'loading');
         }
       },
-      fail:function(error){
-        console.log("login error",error);
+      fail: function (error) {
+        console.log("login error", error);
       },
 
-      
+
     })
     // 获取用户信息
     wx.getSetting({
@@ -95,25 +102,33 @@ App({
               }
               username = res.userInfo['nickName'];
               gender = res.userInfo['gender'];
-             //将用户信息添加到数据库的对应表
-              if (openid && username) {
-                var User = Bmob.Object.extend("user");
-                var user = new User();
+              //将用户信息添加到数据库的对应表
+
+              var User = Bmob.Object.extend("user");
+              var user = new User();
+              var openid = that.globalData.openid;
+              if (opeid) {
                 user.set("openid", openid);
-                user.set("username", username);
-                user.set("gender",);
-                //添加数据，第一个入口参数是null
-                user.save(null, {
-                  success: function (result) {
-                    // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-                    console.log("创建成功, objectId:" + result);
-                  },
-                  error: function (result, error) {
-                    // 添加失败
-                    console.log('创建失败', error);
-                  }
-                });
               }
+              user.set("username", username);
+              user.set("gender", gender);
+              //添加数据，第一个入口参数是null
+              user.save(null, {
+                success: function (result) {
+                  // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                  console.log("创建成功, objectId:" + result);
+                },
+                error: function (result, error) {
+                  // 添加失败
+                  console.log('创建失败22222', error);
+                  result.fetchWhenSave(true);
+                  result.set("openid", openid);
+                  user.set("username", username);
+                  user.set("gender", gender);
+                  result.save();
+                }
+              });
+
 
             }
           })
@@ -122,10 +137,17 @@ App({
     })
   },
 
+  onShow: function () {
+    //   var f = this.globalData.shopbadge;
+    //  f++;
+    //  this.globalData.shopbadge = f;
+    //  console.log('ccccc:',f);
+  },
+
   globalData: {
     userInfo: null,
-    shopbadge:0,
-    hello:0,
-    openId:'',
+    shopbadge: 0,
+    hello: 0,
+    openid: '',
   }
 })
