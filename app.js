@@ -32,6 +32,7 @@ App({
               // })
               console.log('result', result)
               openid = result.openid;
+              that.globalData.openid = openid;
               //指定用户，跳转激活页面
               if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
 
@@ -121,16 +122,10 @@ App({
     })
   },
 
-  onShow:function(){
-  //   var f = this.globalData.shopbadge;
-  //  f++;
-  //  this.globalData.shopbadge = f;
-  //  console.log('ccccc:',f);
-  },
-
   globalData: {
     userInfo: null,
-    shopbadge:100,
+    shopbadge:0,
     hello:0,
+    openId:'',
   }
 })

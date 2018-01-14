@@ -1,6 +1,22 @@
 <!--pages/shopcart.wxml-->
-<view class='container'>
+<view class='section'>
 
-<text >购物车</text>
+  <view class='cell' wx:for="{{[{a:''},{b:''},{c:''}]}}" wx:key='a'>
+    <image class='cell-check' src='../images/gwc_wxz@2x.png' bindtap='checkItem' data-item='{{item}}'></image>
+    <image class='cell-cover' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/14/8a9cb752402bd61f801de5c9a467e738.png'></image>
+    <view class='cell-introduce'>
+      <view class='cell-title'>雨前A级西湖龙井 100克</view>
+      <view class='cell-description'>净含量：100克</view>
+      <view class='cell-price'>¥1000</view>
+    </view>
 
+  </view>
+
+</view>
+
+<view class='bottom'>
+  <view class='bottom-amount' bindtap='addToshopCart'>合计
+    <text class='bottom-amount-text'> ￥{{'10000'}} </text>
+  </view>
+  <view class='bottom-settlement' bindtap='immediateBuy'>结算</view>
 </view>

@@ -5,23 +5,24 @@
   <view class='product-image'>
     <image class='product-image-frame' src=' http://bmob-cdn-15679.b0.upaiyun.com/2018/01/10/548a9c81400cd0d8807c3314c328c475.jpg' mode='aspectFill'></image>
   </view>
-  <view class='product-detail'>
-    <text class='product-name'>雨前A级西湖龙井 100克</text>
-    <text class='product-price'>¥{{1000}}</text>
-  </view>
 
-  <view class='introduce'>
+   <view class='product-detail'>
+    <view class='product-name'>雨前A级西湖龙井 100克</view>
+    <view class='product-price'>¥{{1000}}</view>
+  </view> 
+
+    <view class='introduce'>
 
     <text class='introduce-title'>— {{'老枞水仙'}} —</text>
 
-    <view class='introduce-cell' wx:for='{{introduceList}}' wx:key='a'>
+     <view class='introduce-cell' wx:for='{{introduceList}}' wx:key='a'>
       <view class='cell-head'>{{item.head}}</view>
-      <view class='cell-tail'>{{item.tail}}</view>
-    </view>
-  </view>
+      <view class='cell-tail'>{{item.tail}}</view> 
+     </view> 
+  </view> 
+ 
 
-
-  <view class='detail'>
+   <view class='detail'>
     <image class='detail-image' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/13/f420a9f2407a7d9f803716dfeff8e692.png' mode='aspectFill'></image>
 
     <view class='detail-text' wx:for='{{detailList}}' wx:key='a'>
@@ -29,13 +30,13 @@
       <view class='detail-text-content'>{{item.content}}</view>
     </view>
 
-    <image class='detail-bottom-image' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/13/8f1eed6940b5562b807ab8466d975a9c.png'></image>
+     <image class='detail-bottom-image' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/13/8f1eed6940b5562b807ab8466d975a9c.png'></image>
     <view class='detail-bottom-motto'>低至尘埃的醇香， 却又有一种惊醒的悠然韵.
-    </view>
+    </view> 
   </view>
 
-  <view class='shopcart-section'>
+   <view class='shopcart-section'>
     <view class='shopcart-addButton' bindtap='addToshopCart'>加入购物车</view>
     <view class='shopcart-buy' bindtap='immediateBuy'>立即购买</view>
-  </view>
+  </view> 
 </view>

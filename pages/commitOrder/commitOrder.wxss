@@ -1,1 +1,182 @@
 /* pages/commitOrder.wxss */
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部cell */
+
+.cell {
+  height: 100pt;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #f4f4f4;
+}
+
+.cell-cover {
+  width: 90pt;
+  height: 80pt;
+  margin-right: 15px;
+}
+
+.cell-introduce {
+  display: flex;
+  flex-direction: column;
+  width: 64%;
+  height: 100%;
+}
+
+.cell-title {
+  color: #444;
+  font: PingFangSC-Light;
+  font-size: 15pt;
+  margin-top: 15px;
+}
+
+.cell-description {
+  color: #999;
+  font: PingFangSC-Light;
+  font-size: 13pt;
+}
+
+.cell-price {
+  color: #c90b0b;
+  font: PingFangSC-Light;
+  font-size: 15pt;
+}
+
+/* 联系人cell */
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.contact-cell {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 0.5rpx solid #f0f0f0;
+  height: 45pt;
+  margin-left: 0px;
+  line-height: 45pt;
+  align-items: center;
+}
+
+.contact-cell-head {
+  font: PingFangSC-Light;
+  font-size: 15pt;
+  color: #444;
+}
+
+.contact-cell-tail {
+  font: PingFangSC-Light;
+  font-size: 15pt;
+  color: #111;
+   margin-left: 15px;
+  /* margin-right: 0px;  */
+  width: 80%;
+}
+
+.phcolor{
+  color: #ccc;
+  font: PingFangSC-Light;
+
+}
+
+.pay-title{
+  background: #F4F4F4;
+  font: PingFangSC-Light;
+  color: #444;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  
+}
+.pay-cell {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 0.5rpx solid #f0f0f0;
+  height: 45pt;
+  line-height: 45pt;
+  align-items: center;
+  justify-content: space-between;  
+  
+}
+
+.pay-mothod{
+  font: PingFangSC-Light;
+  color: #444;
+  font-size: 15pt;
+}
+
+.pay-icon{
+  height: 20px;
+  width: 20px;
+  margin-left: 5px;
+  float: left;
+
+}
+.pay-tail{
+  margin: 0 auto;
+  height: 20px;
+  width: 20px;
+  margin-right: 0px;
+}
+
+.pay-balance{
+ margin:  auto;  
+ font: PingFangSC-Light;
+ font-size: 13pt;
+ color: #999;
+ margin-right: -50px;
+ width: 180px;
+ height: 30px;
+ float: right;
+ text-align: center;
+ line-height: 30px;
+}
+
+/*底部固定按钮*/
+.bottom {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0px;
+  flex: 1;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.bottom-amount {
+  background: #f4f4f4;
+  width: 70%;
+  font: PingFangSC-Light;
+  font-size: 15px;
+  color: #444;
+  text-align: right;
+  line-height: 50px;
+  justify-content: center;
+}
+
+.bottom-amount-text {
+  color: #c90b0b;
+  font-size: 15pt;
+  font: PingFangSC-Light;
+  margin-right: 10px;
+}
+
+.bottom-settlement {
+  background: #ceaf6c;
+  width: 30%;
+  font: PingFangSC-Light;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  justify-content: center;
+}

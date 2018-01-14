@@ -11,14 +11,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+  checkItemList:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+       
+    var checkUrl = '../images/gwc_wxz@2x.png';
+
+    for (var i = 0; i < 3;i++){
+     
+      this.checkItemList.push(checkUrl);
+      
+    }
+
   },
 
   /**
@@ -68,5 +76,11 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  checkItem:function(e){
+    console.log("xxx:",e);
+    e.src ='../images/gwc_xz@2x.png';
+  },
+
 })
