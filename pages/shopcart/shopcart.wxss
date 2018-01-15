@@ -18,9 +18,9 @@
 
 .cell-check {
   width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
+  height: 19px;
+  margin-left: 0px;
+  margin-right: 10px;
 }
 
 .cell-cover {
@@ -39,20 +39,31 @@
 .cell-title {
   color: #444;
   font: PingFangSC-Light;
-  font-size: 15pt;
-  margin-top: 15px;
+  font-size: 15px;
+  margin-top: 23px;
 }
 
 .cell-description {
   color: #999;
   font: PingFangSC-Light;
-  font-size: 13pt;
+  font-size: 13px;
+  margin-top: 5px;
 }
 
 .cell-price {
   color: #c90b0b;
   font: PingFangSC-Light;
-  font-size: 15pt;
+  font-size: 15px;
+  margin-top: 5px;
+
+}
+.cell-amount{
+ font: PingFangSC-Light;
+ font-size: 13px;
+ color: #999;
+ margin-top: -20px;
+ text-align: right;
+ 
 }
 
 .bottom {
@@ -79,7 +90,7 @@
 
 .bottom-amount-text {
   color: #c90b0b;
-  font-size: 15pt;
+  font-size: 15px;
   font: PingFangSC-Light;
   margin-right: 10px;
 
@@ -95,3 +106,4 @@
   line-height: 50px;
   justify-content: center;
 }
+

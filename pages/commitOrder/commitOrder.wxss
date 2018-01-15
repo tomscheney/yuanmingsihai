@@ -165,7 +165,7 @@
 
 .bottom-amount-text {
   color: #c90b0b;
-  font-size: 15pt;
+  font-size: 15px;
   font: PingFangSC-Light;
   margin-right: 10px;
 }

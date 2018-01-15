@@ -2,6 +2,7 @@
 
 var Bmob = require('../../utils/bmob.js');
 var common = require('../../utils/common.js');
+
 const app = getApp()
 
 Page({
@@ -72,7 +73,7 @@ Page({
   bindPayTap:function(e){
     console.log("index:",e);
     var index = e.currentTarget.dataset.index;
-    switch (index){
+     switch(index){
        case 0:{
        wx.scanCode({
          success: (res) => {
@@ -83,6 +84,9 @@ Page({
        case 1:{
          //传参数金额，名称，描述,openid
          var openid = app.globalData.openid;
+
+         console.log("openid:",openid);
+
          Bmob.Pay.wechatPay(0.01, '名称1', '描述', openid).then(function (resp) {
            console.log('resp');
            console.log(resp);

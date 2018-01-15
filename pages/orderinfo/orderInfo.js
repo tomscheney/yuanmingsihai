@@ -13,24 +13,47 @@ Page({
    * 页面的初始数据
    */
   data: {
-    introduceList: [{ head: "品名", tail: "武夷岩茶" }, { head: "净含量", tail: "1000克" }, { head: "质量等级", tail: "特级" }, { head: "冲泡温度", tail: "100度，沸水" }, {
-      head: "冲泡时间", tail: "  第一泡润茶出汤要快，第二泡5秒出汤，第三泡开始每泡可延续10秒出汤。"
-    }, {
-      head: "功效", tail: "改善皮肤过敏，预防老化，美白细肤，能够溶解脂肪减肥瘦身的功效。"
-    }],
-    detailList: [{ title: "干茶", content: "条索状，外形紧实，色泽乌绿" }, { title: "香气", content: "香浓辛锐且清长，有独特的木质香" }, { title: "茶汤", content: "橙黄透亮，木质香浓甘醇，枞味明显，回甘清爽" }, { title: "叶底", content: "叶底均匀，大片且柔软" },],
-
+   
+   coverUrl:'',
+   productName:'',
+   price:'',
+   introduceImageUrl:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options:", options);
-    // var count = getApp().globalData.shopbadge;
-    // count++;
-    var sa = this.introduceList.push('1');
-    console.log("count:", app.globalData.shopbadge);
+
+    
+    console.log("options:", options.productid);
+   
+    var productid = options.productid;
+
+    var Tea = Bmob.Object.extend("Tea");
+    //创建查询对象，入口参数是对象类的实例
+    var tea = new Bmob.Query(Tea);
+    //查询单条数据，第一个参数是这条数据的objectId值
+    var that = this;
+    tea.get(productid, {
+      success: function (result) {
+        // 查询成功，调用get方法获取对应属性的值
+        var coverUrl = result.get("coverUrl");
+        var productName = result.get("name");
+        var price = result.get("price");
+        var introduceImageUrl = result.get("introduceImageUrl");
+
+        that.setData({
+          coverUrl: coverUrl,
+          productName: productName,
+          price: price,
+          introduceImageUrl: introduceImageUrl,
+        })
+      },
+      error: function (object, error) {
+        // 查询失败
+      }
+    });
 
   },
 
@@ -91,7 +114,11 @@ wx.navigateTo({
 })
 },
 addToshopCart:function () {
-  app.globalData.shopbadge += 1;
+
+  var count = app.globalData.shopbadge;
+  count+=1;
+  app.globalData.shopbadge = count;
+  console.log("count:",count);
   common.showModal("添加购物车成功");
 }
 

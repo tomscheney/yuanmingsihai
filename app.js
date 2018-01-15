@@ -1,9 +1,8 @@
 //app.js
 
 var Bmob = require('utils/bmob.js');
-Bmob.initialize("97d353af489136a32c44834a9c27267f", "d695b05371f27727e99f68c2ab98475e");
-var APP_ID = 'wxd339da91bf1b1fe3';
-var APP_SECRECT = '97d353af489136a32c44834a9c27267f';
+Bmob.initialize("9bb3f7c98ca2859aec9941b4d65ba029", "99ca98d8e9ac8a9c4fd05a7b0afc07eb");
+
 
 App({
   onLaunch: function () {
@@ -149,5 +148,6 @@ App({
     shopbadge: 0,
     hello: 0,
     openid: '',
+    orderList:[],
   }
 })
