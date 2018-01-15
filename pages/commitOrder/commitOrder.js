@@ -1,4 +1,9 @@
 // pages/commitOrder.js
+
+var Bmob = require('../../utils/bmob.js');
+var common = require('../../utils/common.js');
+const app = getApp()
+
 Page({
 
   /**
@@ -67,7 +72,7 @@ Page({
   bindPayTap:function(e){
     console.log("index:",e);
     var index = e.currentTarget.dataset.index;
-     switch(e){
+    switch (index){
        case 0:{
        wx.scanCode({
          success: (res) => {
@@ -77,8 +82,8 @@ Page({
        }
        case 1:{
          //传参数金额，名称，描述,openid
-         var openid = this.globalData.openid;
-         Bmob.Pay.wechatPay(0.01, '名称1', '描述', openId).then(function (resp) {
+         var openid = app.globalData.openid;
+         Bmob.Pay.wechatPay(0.01, '名称1', '描述', openid).then(function (resp) {
            console.log('resp');
            console.log(resp);
 

@@ -2,12 +2,11 @@
 
 @import '../../style/weui.wxss'
 
-
 .section {
   display: flex;
   flex-direction: column;
- width: 100%;
- background: white;
+  width: 100%;
+  background: white;
 }
 
 .product-image {

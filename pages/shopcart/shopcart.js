@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  checkItemList:[],
+  checkItemList: ['a'],
   },
 
   /**
@@ -20,11 +20,10 @@ Page({
   onLoad: function (options) {
        
     var checkUrl = '../images/gwc_wxz@2x.png';
-
+    
     for (var i = 0; i < 3;i++){
      
-      this.checkItemList.push(checkUrl);
-      
+    
     }
 
   },

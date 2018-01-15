@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-
+<view class='section'>
 <view class="flex-top">
   <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top'>
     <view bindtap='selectPriceGrade' data-index='{{index}}'>{{item}}</view>
@@ -9,27 +9,29 @@
 </view>
 
 
-<view class='flex-wrp ' style='margin-top:15px' wx:for="{{products}}" wx:key='a'>
+<view class='flex-wrp '  wx:for="{{products}}" wx:key='a'>
   <!--纵向布局  -->
   <view class='flex-item' wx:for='{{item}}' wx:key='b'>
     <!--横向布局  -->
 
     <!--视图内部纵向布局  -->
-    <view class='flex-item-V ' bindtap='bindViewTap'>
-
+    <view class='singal-item ' bindtap='bindViewTap'>
       <image class='image_frame' mode='aspectFill' src='{{item.coverUrl}}'>
 
       </image>
-      <text class='breif-text'>{{item.description}}</text>
+      <!-- <text class='breif-text'>{{item.description}}</text> -->
 
       <text class='product-text'>{{item.name}}</text>
       <text class='product-price'>¥{{selectIndex * 2 + 1}}000</text>
+      
     </view>
   </view>
 </view>
+</view>
 
 <view class='shopcart-section' >
-  <image class='shopcart-button' bindtap='bindShopCart'></image>
+  <image class='shopcart-button' bindtap='bindShopCart' src='../images/sy_gwc@3x.png' mode='aspectFit'></image>
   <view class='shop-iconbadge' >{{iconbadge}}</view>
   
 </view>
+

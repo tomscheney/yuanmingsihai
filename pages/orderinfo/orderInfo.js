@@ -29,7 +29,7 @@ Page({
     console.log("options:", options);
     // var count = getApp().globalData.shopbadge;
     // count++;
-
+    var sa = this.introduceList.push('1');
     console.log("count:", app.globalData.shopbadge);
 
   },
