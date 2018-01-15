@@ -32,20 +32,20 @@
 .cell-title {
   color: #444;
   font: PingFangSC-Light;
-  font-size: 15pt;
+  font-size: 15px;
   margin-top: 15px;
 }
 
 .cell-description {
   color: #999;
   font: PingFangSC-Light;
-  font-size: 13pt;
+  font-size: 13px;
 }
 
 .cell-price {
   color: #c90b0b;
   font: PingFangSC-Light;
-  font-size: 15pt;
+  font-size: 15px;
 }
 
 /* 联系人cell */
@@ -69,13 +69,13 @@
 
 .contact-cell-head {
   font: PingFangSC-Light;
-  font-size: 15pt;
+  font-size: 15px;
   color: #444;
 }
 
 .contact-cell-tail {
   font: PingFangSC-Light;
-  font-size: 15pt;
+  font-size: 15px;
   color: #111;
    margin-left: 15px;
   /* margin-right: 0px;  */
@@ -110,7 +110,7 @@
 .pay-mothod{
   font: PingFangSC-Light;
   color: #444;
-  font-size: 15pt;
+  font-size: 15px;
 }
 
 .pay-icon{
@@ -130,7 +130,7 @@
 .pay-balance{
  margin:  auto;  
  font: PingFangSC-Light;
- font-size: 13pt;
+ font-size: 13px;
  color: #999;
  margin-right: -50px;
  width: 180px;
@@ -165,7 +165,7 @@
 
 .bottom-amount-text {
   color: #c90b0b;
-  font-size: 15pt;
+  font-size: 15px;
   font: PingFangSC-Light;
   margin-right: 10px;
 }

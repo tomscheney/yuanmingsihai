@@ -18,15 +18,23 @@ Page({
   },
 
   //事件处理函数
-  bindViewTap: function () {
+  bindViewTap: function (e) {
     
+   var index = e.currentTarget.dataset.index;
+   var column = parseInt(index/2);
+   var row = parseInt(index % 2);
+   var Tea = Bmob.Object.extend("Tea");
 
+   var tempList = this.data.products[column];
+   console.log('row：', row);
+
+   var object = tempList[row];
+   var productid = object.id;
     wx.navigateTo({
-      url: '../orderinfo/orderInfo'
+      url: '../orderinfo/orderInfo?productid=' + productid,
     })
 
-    console.log('我点击了');
- 
+    console.log('我是object:', productid);
  
   },
   onLoad: function (e) {
@@ -51,11 +59,10 @@ Page({
             temp.push(nextObject);
           }
           list.push(temp);
-          console.log(object.get('name') + ' - ' + object.get('description') + ' - ' + object.get('coverUrl'));
-          console.log('list', temp)
+          console.log('object.id', object.id)
 
         }
-        console.log('list', list)
+        console.log('results', results)
 
         that.setData({
           products: list
@@ -70,7 +77,7 @@ Page({
     var that = this;
     Object.defineProperty(app.globalData, 'shopbadge', {
       get: function () {
-        return that.iconbadge;
+        return that.data.iconbadge;
       },
       set: function (value) {
         that.setData({
@@ -95,7 +102,6 @@ Page({
     })
 
   }
-
 
 })
 
