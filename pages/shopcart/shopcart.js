@@ -13,6 +13,7 @@ Page({
   data: {
 
     checkItemList:[],
+    orderList:[],
   },
 
   /**
@@ -20,16 +21,16 @@ Page({
    */
   onLoad: function (options) {
    var that = this;
-    var Diary = Bmob.Object.extend("diary");
-    var query = new Bmob.Query(Diary);
-    var openid = app.globalData.openid;
-    query.equalTo("openid", openid);
-    
+   var Order = Bmob.Object.extend("Order");
+   var order = new Bmob.Query(Order);
+   var openid = app.globalData.openid;
+   order.equalTo("openid", openid);
     // 查询所有数据
-    query.find({
+   order.find({
       success: function (results) {
         console.log("共查询到 " + results.length + " 条记录");
-        
+        app.globalData.shopbadge = results.length;
+
         var checkUrl = '../images/gwc_xz@2x.png';
         var tempList = [];
        
@@ -37,12 +38,18 @@ Page({
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           tempList.push(checkUrl);
-
-          console.log(object.id + ' - ' + object.get('title'));
+         for (var j = i + 1 ;j < results.lenght;j++){
+           var nextObject = results[j];
+           if(object.id == nextObject.id){
+             
+           }
+         }
+          console.log(object.id + ' - ' + object.get('name'));
         }
 
         that.setData({
           checkItemList: tempList,
+          orderList: results,
         })
       },
       error: function (error) {

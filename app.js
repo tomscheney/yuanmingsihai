@@ -11,15 +11,11 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    var that = this;
-    var openid = '';
-    var username = '';
-    var gender = '';
+    var that = this;    
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('resCode:', res)
 
         if (res.code) {
           //发起网络请求
@@ -29,8 +25,10 @@ App({
               //   loading: true,
               //   url: result.openid
               // })
-              console.log('result', result)
-              openid = result.openid;
+              var openid = result.openid;
+              that.globalData.openid = openid;
+              console.log('openid:', that.globalData.openid)
+
               //指定用户，跳转激活页面
               if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
 
@@ -46,21 +44,29 @@ App({
               if (userInfo) {
                 user.set("username", userInfo['username']);
                 user.set("gender", userInfo['gender']);
+                console.log('哈哈我进来了');
+
               }
               //添加数据，第一个入口参数是null
               user.save(null, {
                 success: function (result) {
                   // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-                  console.log("创建成功, objectId:" + result);
+                  console.log("创建成功1111, objectId:" + result);
                 },
                 error: function (result, error) {
                   // 添加失败
-                  console.log('创建失败1111', error);
-                  result.fetchWhenSave(true);
-                  result.set("openid", openid);
-                  user.set("username", username);
-                  user.set("gender", gender);
-                  result.save();
+                  console.log('添加失败');
+
+                  user.destroy({
+                    success: function (myObject) {
+                      // 删除成功
+                      console.log('删除成功');
+                    },
+                    error: function (myObject, error) {
+                      // 删除失败
+                      console.log('删除失败');
+                    }
+                  });
                 }
               });
 
@@ -86,12 +92,13 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log("res:", res.authSetting);
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+              that.globalData.userInfo = res.userInfo
               console.log('userInfo', res.userInfo)
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -99,38 +106,16 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
-              username = res.userInfo['nickName'];
-              gender = res.userInfo['gender'];
-              //将用户信息添加到数据库的对应表
-
-              var User = Bmob.Object.extend("user");
-              var user = new User();
-              var openid = that.globalData.openid;
-              if (opeid) {
-                user.set("openid", openid);
-              }
-              user.set("username", username);
-              user.set("gender", gender);
-              //添加数据，第一个入口参数是null
-              user.save(null, {
-                success: function (result) {
-                  // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-                  console.log("创建成功, objectId:" + result);
-                },
-                error: function (result, error) {
-                  // 添加失败
-                  console.log('创建失败22222', error);
-                  result.fetchWhenSave(true);
-                  result.set("openid", openid);
-                  user.set("username", username);
-                  user.set("gender", gender);
-                  result.save();
-                }
-              });
-
 
             }
           })
+        } else {
+           wx.authorize({
+             scope: 'scope.userInfo',
+             success() {
+ 
+             }
+           })
         }
       }
     })

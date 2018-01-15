@@ -13,11 +13,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
+   productid: '',
    coverUrl:'',
    productName:'',
    price:'',
    introduceImageUrl:'',
+   netContent: '',
+   description:'',
   },
 
   /**
@@ -29,7 +31,9 @@ Page({
     console.log("options:", options.productid);
    
     var productid = options.productid;
-
+    this.setData({
+      productid: productid,
+    })
     var Tea = Bmob.Object.extend("Tea");
     //创建查询对象，入口参数是对象类的实例
     var tea = new Bmob.Query(Tea);
@@ -42,13 +46,17 @@ Page({
         var productName = result.get("name");
         var price = result.get("price");
         var introduceImageUrl = result.get("introduceImageUrl");
-
+        var netContent = result.get("netContent");
+        var description = result.get("description");
         that.setData({
           coverUrl: coverUrl,
           productName: productName,
           price: price,
           introduceImageUrl: introduceImageUrl,
+          netContent: netContent,
+          description: description,
         })
+        console.log("result:",result);
       },
       error: function (object, error) {
         // 查询失败
@@ -115,11 +123,38 @@ wx.navigateTo({
 },
 addToshopCart:function () {
 
-  var count = app.globalData.shopbadge;
-  count+=1;
-  app.globalData.shopbadge = count;
-  console.log("count:",count);
-  common.showModal("添加购物车成功");
+  
+  var Order = Bmob.Object.extend("Order");
+  var order = new Order();
+  var openid = app.globalData.openid;
+  order.set("openid", openid);
+  order.set("productid", this.data.productid);
+  order.set("name", this.data.productName);
+  order.set("price", this.data.price);
+  order.set("coverUrl", this.data.coverUrl);
+  order.set("netContent", this.data.netContent);
+  order.set("description", this.data.description);
+
+  
+  //添加数据，第一个入口参数是null
+  order.save(null, {
+    success: function (result) {
+      // 添加成功，返回成功之后的objectId
+      //（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+      console.log("日记创建成功, objectId:" + result.get('name'));
+      common.showModal("添加购物车成功");
+      var count = app.globalData.shopbadge;
+      count += 1;
+      app.globalData.shopbadge = count;
+      console.log("count:", count);
+
+    },
+    error: function (result, error) {
+      // 添加失败
+      console.log('创建日记失败');
+
+    }
+  });
 }
 
 })

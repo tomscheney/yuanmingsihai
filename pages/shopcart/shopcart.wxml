@@ -1,14 +1,14 @@
 <!--pages/shopcart.wxml-->
 <view class='section'>
 
-  <view class='cell' wx:for="{{[{a:''},{b:''},{c:''}]}}" wx:key='a'>
+  <view class='cell' wx:for='{{orderList}}' wx:key='a'>
     <image class='cell-check' src='{{checkItemList[index]}}' bindtap='checkItem' data-index='{{index}}'></image>
     <image class='cell-cover' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/14/8a9cb752402bd61f801de5c9a467e738.png'></image>
     <view class='cell-introduce'>
-      <view class='cell-title'>雨前A级西湖龙井 100克</view>
-      <view class='cell-description'>净含量：100克</view>
-      <view class='cell-price'>¥1000</view>
-       <view class='cell-amount'>x1</view> 
+      <view class='cell-title'>{{item.name}}</view>
+      <view class='cell-description'>净含量：{{item.netContent}}</view>
+      <view class='cell-price'>¥{{item.price}}</view>
+       <view class='cell-amount'>x{{item.amount}}</view> 
     </view>
 
   </view>
@@ -19,5 +19,5 @@
   <view class='bottom-amount' >合计
     <text class='bottom-amount-text'> ￥{{'10000'}} </text>
   </view>
-  <view class='bottom-settlement' bindtap='clickSettlement'>提交订单</view>
+  <view class='bottom-settlement' bindtap='clickSettlement'>结算</view>
 </view>

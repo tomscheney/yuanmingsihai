@@ -33,5 +33,5 @@
     <view class='bottom-amount' bindtap='addToshopCart'>合计
       <text class='bottom-amount-text'> ￥{{'10000'}} </text>
     </view>
-    <view class='bottom-settlement' bindtap='immediateBuy'>结算</view>
+    <view class='bottom-settlement' bindtap='immediateBuy'>提交订单</view>
   </view>
