@@ -38,37 +38,74 @@ App({
               }
 
               var User = Bmob.Object.extend("user");
-              var user = new User();
-              user.set("openid", openid);
-              var userInfo = that.globalData.userInfo;
-              if (userInfo) {
-                user.set("username", userInfo['username']);
-                user.set("gender", userInfo['gender']);
-                console.log('哈哈我进来了');
+              //创建查询对象，入口参数是对象类的实例
+              var query = new Bmob.Query(User);
+              //查询单条数据，第一个参数是这条数据的objectId值
+              // user.equalTo("openid",openid);
+              query.first({
+                success: function(result){
+                  console.log("查询成功:result", result.get('openid'));
+                  //更新用户数据
+                  
+                  var userInfo = that.globalData.userInfo;
+                  if (userInfo) {
+                    result.set("username", userInfo['nickName']);
+                    result.set("gender", userInfo['gender']);
+                    result.set("avatarUrl", userInfo['avatarUrl']);
+                    result.set("city", userInfo['city']);
+                    result.set("country", userInfo['country']);
+                    result.set("language", userInfo['language']);
+                    result.set("province", userInfo['province']);
+                    result.save();
+                  }
+                  console.log('我有userInfo');
 
-              }
-              //添加数据，第一个入口参数是null
-              user.save(null, {
-                success: function (result) {
-                  // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-                  console.log("创建成功1111, objectId:" + result);
-                },
-                error: function (result, error) {
-                  // 添加失败
-                  console.log('添加失败');
 
-                  user.destroy({
-                    success: function (myObject) {
-                      // 删除成功
-                      console.log('删除成功');
+                }, fail: function(object, error){
+                  console.log("查询失败:error",errror);
+                 //如果没有查询到openid，则添加数据
+
+                  var user = new User();
+                  user.set("openid", openid);
+                  var userInfo = that.globalData.userInfo;
+                  if (userInfo) {
+                    user.set("username", userInfo['nickName']);
+                    user.set("gender", userInfo['gender']);
+                    user.set("avatarUrl", userInfo['avatarUrl']);
+                    user.set("city", userInfo['city']);
+                    user.set("country", userInfo['country']);
+                    user.set("language", userInfo['language']);
+                    user.set("province", userInfo['province']);
+
+                    console.log('我有userInfo');
+
+                  }
+                  //添加数据，第一个入口参数是null
+                  user.save(null, {
+                    success: function (result) {
+                      // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                      console.log("创建成功1111, objectId:" + result);
                     },
-                    error: function (myObject, error) {
-                      // 删除失败
-                      console.log('删除失败');
+                    error: function (result, error) {
+                      // 添加失败
+                      console.log('添加失败');
+
+                      user.destroy({
+                        success: function (myObject) {
+                          // 删除成功
+                          console.log('删除成功');
+                        },
+                        error: function (myObject, error) {
+                          // 删除失败
+                          console.log('删除失败');
+                        }
+                      });
                     }
                   });
                 }
               });
+
+              
 
 
             },
