@@ -133,8 +133,9 @@ Page({
 
     //创建查询对象，入口参数是对象类的实例
     var query = new Bmob.Query(Order);
-    query.equalTo("productid", this.productid);
     query.equalTo("openid", app.globalData.openid);
+    query.equalTo("productid", this.data.productid);
+    console.log("productid:", this.data.productid);
 
     query.find({
       success: function (results) {
@@ -145,13 +146,12 @@ Page({
          var count = app.globalData.shopbadge;
          count += 1;
          app.globalData.shopbadge = count;
-         console.log("count:", count);
          amount++;
          object.set("amount", amount);
          object.save();
 
          console.log("amount:", amount);
-        
+         common.showModal("添加购物车成功");
          console.log(typeof object);
        } else {
 
@@ -171,11 +171,12 @@ Page({
            success: function (result) {
              // 添加成功，返回成功之后的objectId
              //（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-             common.showModal("添加购物车成功");
              var count = app.globalData.shopbadge;
              count += 1;
              app.globalData.shopbadge = count;
              console.log("count:", count);
+             common.showModal("添加购物车成功");
+
            },
            error: function (result, error) {
              // 添加失败

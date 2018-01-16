@@ -39,12 +39,12 @@ Page({
           var object = results[i];
           var amount = object.get("amount")
           count += amount;
-          totalfee += (parseInt(object.get("price")) * count);
+          totalfee += (parseInt(object.get("price")) * amount);
           tempList[i] = checkUrl;
         }
         app.globalData.shopbadge = count;
 
-        // console.log(object.id + ' - ' + object.get('name'));
+        console.log("totalfee:",totalfee);
 
         that.setData({
           checkItemList: tempList,
@@ -97,8 +97,10 @@ Page({
     })
 
   },
+
+  //结算
   clickSettlement: function () {
-    if (this.totalFee > 0) {
+    if (this.data.totalFee > 0) {
       wx.navigateTo({
         url: '../commitOrder/commitOrder?totalFee=' + this.totalFee,
       })

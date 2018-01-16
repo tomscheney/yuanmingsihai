@@ -41,7 +41,7 @@ App({
               //创建查询对象，入口参数是对象类的实例
               var query = new Bmob.Query(User);
               //查询单条数据，第一个参数是这条数据的objectId值
-              // user.equalTo("openid",openid);
+              query.equalTo("openid",openid);
               query.first({
                 success: function(result){
                   console.log("查询成功:result", result.get('openid'));
