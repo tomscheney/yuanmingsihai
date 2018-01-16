@@ -1,46 +1,11 @@
 /**index.wxss**/
 
-.section{
+.section {
   display: flex;
   flex-direction: column;
   background: white;
   width: 100%;
   height: 100%;
-}
-
-.flex-wrp {
-  display: flex;
-  /* justify-content: flex-start; */
-  /* align-items: flex-start; */
-  background: white;
-}
-
-.flex-item {
-  width: 50%;
-  height: 200px;
-  flex-direction: row;
-  background: white;
-  
-  /* background: rebeccapurple;   */
-}
-
-.singal-item{
-  margin-left: 5px;
-  margin-right: 5px;
-  display: flex;
-  flex-direction: column;
-   background: white; 
-  /* margin-top: 10px; */
-  text-align: center;
-  height: 350rpx;
-}
-
-.image_frame {
-  width: auto;  
-  /* height: 400px; */
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
 }
 
 .flex-top {
@@ -51,15 +16,14 @@
   box-shadow: 0px 0px 1px 1px #e4e4e4;
   background: white;
   margin: 1px;
-  margin-bottom: 10px;
 }
 
 .top-item {
   font-size: 14px;
   text-align: center;
   width: 50px;
-  height: 36px;
-  line-height: 38px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .top-line {
@@ -70,7 +34,41 @@
   margin-left: 1px;
   margin-right: 1px;
   border-radius: 1px;
-  margin-top: -2px;
+  margin-top: -10px;
+}
+
+.flex-wrp {
+  display: flex;
+
+}
+
+.flex-item {
+  width: 50%;
+  flex-direction: row;
+  background: white;
+}
+
+.singal-item {
+  height: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  text-align: center;
+  background: white;
+  overflow: hidden;text-overflow:ellipsis;
+
+}
+
+.image_frame {
+  margin: 0 auto;
+  width: 95%;
+   height: 100px;  
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+
 }
 
 .breif-text {
@@ -85,11 +83,18 @@
 }
 
 .product-text {
+  /* margin: 0 auto; */
   color: #333;
   font-size: 15px;
   text-align: left;
   margin-left: 5px;
   margin-right: 5px;
+  width: 95%;
+   height: 30px;
+  display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
 }
 
 .product-price {
@@ -98,6 +103,8 @@
   text-align: left;
   margin-left: 5px;
   margin-right: 5px;
+  /* height: 30px; */
+
 }
 
 .shopcart-section {
@@ -113,18 +120,18 @@
 
 .shopcart-button {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   width: 25px;
   height: 25px;
-  background: #CEAF6C;
+  background: #ceaf6c;
   margin-right: -10px;
   border-radius: 50%;
-  box-shadow: 1px 1px 1px 1px lightgray; 
+  box-shadow: 1px 1px 1px 1px lightgray;
   padding: 10px;
 }
 
-.shop-iconbadge{
-  background: #C90B0B;
+.shop-iconbadge {
+  background: #c90b0b;
   color: white;
   width: 18px;
   height: 18px;
@@ -134,5 +141,4 @@
   border-radius: 50%;
   text-align: center;
   line-height: 14px;
-  
 }

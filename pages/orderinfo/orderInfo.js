@@ -13,13 +13,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-   productid: '',
-   coverUrl:'',
-   productName:'',
-   price:'',
-   introduceImageUrl:'',
-   netContent: '',
-   description:'',
+    productid: '',
+    coverUrl: '',
+    productName: '',
+    price: 0,
+    introduceImageUrl: '',
+    netContent: '',
+    description: '',
   },
 
   /**
@@ -27,9 +27,9 @@ Page({
    */
   onLoad: function (options) {
 
-    
+
     console.log("options:", options.productid);
-   
+
     var productid = options.productid;
     this.setData({
       productid: productid,
@@ -48,6 +48,7 @@ Page({
         var introduceImageUrl = result.get("introduceImageUrl");
         var netContent = result.get("netContent");
         var description = result.get("description");
+        console.log("xxxresult:",result);;
         that.setData({
           coverUrl: coverUrl,
           productName: productName,
@@ -56,7 +57,7 @@ Page({
           netContent: netContent,
           description: description,
         })
-        console.log("result:",result);
+        console.log("result:", result);
       },
       error: function (object, error) {
         // 查询失败
@@ -116,45 +117,86 @@ Page({
 
   },
 
-immediateBuy:function () {
-wx.navigateTo({
-  url: '../commitOrder/commitOrder',
-})
-},
-addToshopCart:function () {
+  immediateBuy: function () {
+    wx.navigateTo({
+      url: '../commitOrder/commitOrder',
+    })
+  },
+  addToshopCart: function () {
 
-  
-  var Order = Bmob.Object.extend("Order");
-  var order = new Order();
-  var openid = app.globalData.openid;
-  order.set("openid", openid);
-  order.set("productid", this.data.productid);
-  order.set("name", this.data.productName);
-  order.set("price", this.data.price);
-  order.set("coverUrl", this.data.coverUrl);
-  order.set("netContent", this.data.netContent);
-  order.set("description", this.data.description);
 
-  
-  //添加数据，第一个入口参数是null
-  order.save(null, {
-    success: function (result) {
-      // 添加成功，返回成功之后的objectId
-      //（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-      console.log("日记创建成功, objectId:" + result.get('name'));
-      common.showModal("添加购物车成功");
-      var count = app.globalData.shopbadge;
-      count += 1;
-      app.globalData.shopbadge = count;
-      console.log("count:", count);
 
-    },
-    error: function (result, error) {
-      // 添加失败
-      console.log('创建日记失败');
+    //查询单条数据，第一个参数是这条数据的objectId值
+    var that = this;
 
-    }
-  });
-}
+    var Order = Bmob.Object.extend("Order");
+
+    //创建查询对象，入口参数是对象类的实例
+    var query = new Bmob.Query(Order);
+    query.equalTo("productid", this.productid);
+    query.equalTo("openid", app.globalData.openid);
+
+    query.find({
+      success: function (results) {
+        console.log("results",results);
+       if(results.length > 0){
+         var object = results[0];
+         var amount = object.get('amount');
+         var count = app.globalData.shopbadge;
+         count += 1;
+         app.globalData.shopbadge = count;
+         console.log("count:", count);
+         amount++;
+         object.set("amount", amount);
+         object.save();
+
+         console.log("amount:", amount);
+        
+         console.log(typeof object);
+       } else {
+
+         //新建订单
+         var order = new Order();
+         var openid = app.globalData.openid;
+         order.set("openid", openid);
+         order.set("productid", that.data.productid);
+         order.set("name", that.data.productName);
+         order.set("price", that.data.price);
+         order.set("coverUrl", that.data.coverUrl);
+         order.set("netContent", that.data.netContent);
+         order.set("description", that.data.description);
+         order.set("amount", 1);
+         //添加数据，第一个入口参数是null
+         order.save(null, {
+           success: function (result) {
+             // 添加成功，返回成功之后的objectId
+             //（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+             common.showModal("添加购物车成功");
+             var count = app.globalData.shopbadge;
+             count += 1;
+             app.globalData.shopbadge = count;
+             console.log("count:", count);
+           },
+           error: function (result, error) {
+             // 添加失败
+             console.log('创建订单失败',error);
+
+           }
+         });
+
+       }
+
+
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+        
+
+      }
+
+    })
+
+    
+  }
 
 })

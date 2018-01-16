@@ -89,19 +89,12 @@ App({
                     error: function (result, error) {
                       // 添加失败
                       console.log('添加失败');
-
-                      user.destroy({
-                        success: function (myObject) {
-                          // 删除成功
-                          console.log('删除成功');
-                        },
-                        error: function (myObject, error) {
-                          // 删除失败
-                          console.log('删除失败');
-                        }
-                      });
+                     
                     }
                   });
+
+
+                  
                 }
               });
 

@@ -1,39 +1,38 @@
 <!--index.wxml-->
 
 <view class='section'>
-<view class="flex-top">
-  <view class='top-item' wx:for="{{['1000型','3000型','5000型']}}" wx:key='top'>
-    <view bindtap='selectPriceGrade' data-index='{{index}}'>{{item}}</view>
-    <view class='top-line' wx:if="{{index == selectIndex}}"></view>
+
+  <view class="flex-top">
+    <view class='top-item' wx:for="{{['VIP1000','VIP3000','VIP5000']}}" wx:key='top'>
+      <view bindtap='selectPriceGrade' data-index='{{index}}'>{{item}}</view>
+      <view class='top-line' wx:if="{{index == selectIndex}}"></view>
+    </view>
   </view>
-</view>
 
 
-<view class='flex-wrp '  wx:for="{{products}}" wx:key='a'>
-  <!--纵向布局  -->
-  <view class='flex-item' wx:for='{{item}}' wx:key='b'>
-    <!--横向布局  -->
+  <view class='flex-wrp ' wx:for="{{products}}" wx:for-index='column' wx:key='a'>
+    <!--纵向布局  -->
+    <view class='flex-item' wx:for='{{item}}' wx:for-index='row' wx:key='b'>
+      <!--横向布局  -->
 
-    <!--视图内部纵向布局  -->
-    <view class='singal-item ' bindtap='bindViewTap' data-index='{{index}}'>
+      <!--视图内部纵向布局  -->
+      <view class='singal-item ' bindtap='bindViewTap' data-index='{{ column * 2 + row  }}'>
 
+        <image class='image_frame' mode='aspectFit' src='{{item.coverUrl}}'>
 
-      <image class='image_frame' mode='aspectFill' src='{{item.coverUrl}}'>
+        </image>
 
-      </image>
-      <!-- <text class='breif-text'>{{item.description}}</text> -->
+        <text class='product-text'>{{item.name}}</text>
+        <text class='product-price'>¥{{selectIndex * 2 + 1}}000</text>
 
-      <text class='product-text'>{{item.name}}</text>
-      <text class='product-price'>¥{{selectIndex * 2 + 1}}000</text>
-      
+      </view>
     </view>
   </view>
 </view>
-</view>
 
-<view class='shopcart-section' >
- 
+<view class='shopcart-section'>
+
   <image class='shopcart-button' bindtap='bindShopCart' src='../images/sy_gwc@2x.png' mode='aspectFit'></image>
-  <view class='shop-iconbadge' >{{iconbadge}}</view>
+  <view class='shop-iconbadge'>{{iconbadge}}</view>
 
 </view>

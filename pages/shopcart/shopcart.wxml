@@ -3,21 +3,34 @@
 
   <view class='cell' wx:for='{{orderList}}' wx:key='a'>
     <image class='cell-check' src='{{checkItemList[index]}}' bindtap='checkItem' data-index='{{index}}'></image>
-    <image class='cell-cover' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/14/8a9cb752402bd61f801de5c9a467e738.png'></image>
+    <image class='cell-cover' src='{{item.coverUrl}}'></image>
     <view class='cell-introduce'>
       <view class='cell-title'>{{item.name}}</view>
       <view class='cell-description'>净含量：{{item.netContent}}</view>
-      <view class='cell-price'>¥{{item.price}}</view>
-       <view class='cell-amount'>x{{item.amount}}</view> 
+      <view class='cell-bottom'>
+        <view class='cell-bottom-price'>¥{{item.price}}</view>
+        <view class='cell-bottom-amount'>
+          <image  class='cell-bottom-image' src='../images/gwc_wxz@2x.png' mode='aspectFit'  src='../images/gwc_wxz@2x.png' mode='aspectFit'></image>
+          <input class='cell-bottom-input' value='{{item.amount}}'></input>
+          <image class='cell-bottom-image' src='../images/gwc_wxz@2x.png' mode='aspectFit'></image>
+        </view>
+      </view>
     </view>
 
   </view>
 
+
 </view>
 
+<block wx:if='{{ orderList.length == 0}}'>
+  <view class='no-order'>
+    <text class='no-order-text'> 空空如也～快去选购产品吧！</text>
+  </view>
+</block>
+
 <view class='bottom'>
-  <view class='bottom-amount' >合计
-    <text class='bottom-amount-text'> ￥{{'10000'}} </text>
+  <view class='bottom-amount'>合计
+    <text class='bottom-amount-text'> ￥{{totalFee}} </text>
   </view>
   <view class='bottom-settlement' bindtap='clickSettlement'>结算</view>
 </view>

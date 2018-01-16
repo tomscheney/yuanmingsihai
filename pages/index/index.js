@@ -26,6 +26,9 @@ Page({
    var Tea = Bmob.Object.extend("Tea");
 
    var tempList = this.data.products[column];
+   console.log('column：', column);
+   console.log('index：', e);
+
    console.log('row：', row);
 
    var object = tempList[row];
@@ -41,9 +44,55 @@ Page({
     
     this.iconbadge = app.globalData.shopbadge;
 
+    //监听购物车数量变化
+    var that = this;
+    Object.defineProperty(app.globalData, 'shopbadge', {
+      get: function () {
+        return that.data.iconbadge;
+      },
+      set: function (value) {
+        that.setData({
+          iconbadge : value,
+        })
+      }
+    });  
+
+    this.startQuery(1000);
+
+  },
+
+  selectPriceGrade: function (e) {
+    console.log(e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index;
+    this.setData({
+      selectIndex: index
+    })
+    var price = 1000;
+   if (index == 1){
+      price = 3000
+    }
+    else if (index == 2){
+      price = 5000
+    }
+
+    
+    this.startQuery(price);
+
+  },
+
+  bindShopCart: function () {
+    wx.navigateTo({
+      url: '../shopcart/shopcart',
+    })
+
+  },
+
+  startQuery:function(price){
+
     var that = this;
     var Tea = Bmob.Object.extend("Tea");
     var tea = new Bmob.Query(Tea);
+    tea.equalTo("price", price);
     // 查询所有数据
     tea.find({
       success: function (results) {
@@ -72,34 +121,6 @@ Page({
         console.log("查询失败: " + error.code + " " + error.message);
       }
     });
-
-    //监听购物车数量变化
-    var that = this;
-    Object.defineProperty(app.globalData, 'shopbadge', {
-      get: function () {
-        return that.data.iconbadge;
-      },
-      set: function (value) {
-        that.setData({
-          iconbadge : value,
-        })
-      }
-    });  
-
-  },
-
-  selectPriceGrade: function (e) {
-    console.log(e.currentTarget.dataset.index)
-    var index = e.currentTarget.dataset.index;
-    this.setData({
-      selectIndex: index
-    })
-  },
-
-  bindShopCart: function () {
-    wx.navigateTo({
-      url: '../shopcart/shopcart',
-    })
 
   }
 
