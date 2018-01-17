@@ -118,9 +118,42 @@ Page({
   },
 
   immediateBuy: function () {
-    wx.navigateTo({
-      url: '../commitOrder/commitOrder',
-    })
+
+    //新建订单
+    var Order = Bmob.Object.extend("Order");
+    var order = new Order();
+    var openid = app.globalData.openid;
+    order.set("openid", openid);
+    order.set("productid", this.data.productid);
+    order.set("name", this.data.productName);
+    order.set("price", this.data.price);
+    order.set("coverUrl", this.data.coverUrl);
+    order.set("netContent", this.data.netContent);
+    order.set("description", this.data.description);
+    order.set("amount", 1);
+    //添加数据，第一个入口参数是null
+    var that = this;
+    order.save(null, {
+      success: function (result) {
+        // 添加成功，返回成功之后的objectId
+        //（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+        var count = app.globalData.shopbadge;
+        count += 1;
+        app.globalData.shopbadge = count;
+
+        wx.navigateTo({
+          url: '../commitOrder/commitOrder?productid=' + that.data.productid,
+        })
+      },
+      error: function (result, error) {
+        // 添加失败
+        console.log('创建订单失败', error);
+
+      }
+    });
+
+
+   
   },
   addToshopCart: function () {
 

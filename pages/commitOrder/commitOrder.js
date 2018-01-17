@@ -28,45 +28,52 @@ Page({
    */
   onLoad: function (options) {
 
-    var that = this;
-    var Order = Bmob.Object.extend("Order");
-    var order = new Bmob.Query(Order);
-    var openid = app.globalData.openid;
-    order.equalTo("openid", openid);
-    // 查询所有数据
-    order.find({
-      success: function (results) {
-        console.log("共查询到 " + results.length + " 条记录");
+    var productid = options.productid;
 
-        var checkUrl = '../images/gwc_xz@2x.png';
-        var tempList = [];
-        var count = 0;
-        var totalfee = 0;
-        // 循环处理查询到的数据
-        for (var i = 0; i < results.length; i++) {
-          var object = results[i];
-          var amount = object.get("amount")
-          count += amount;
-          totalfee += object.get("price") * amount;
-          tempList[i] = checkUrl;
-        }
-        app.globalData.shopbadge = count;
+   
 
-        console.log("totalfee:", totalfee);
-
-        that.setData({
-          orderList: results,
-          totalFee: totalfee,
-        })
-        console.log("orderList", that.data.orderList);
-
-
-      },
-      error: function (error) {
-        console.log("查询失败: " + error.code + " " + error.message);
+      var that = this;
+      var Order = Bmob.Object.extend("Order");
+      var order = new Bmob.Query(Order);
+      var openid = app.globalData.openid;
+      order.equalTo("openid", openid);
+      if (productid) {
+        order.equalTo("productid", productid);
       }
-    });
+      // 查询所有数据
+      order.find({
+        success: function (results) {
+          console.log("共查询到 " + results.length + " 条记录");
 
+          var checkUrl = '../images/gwc_xz@2x.png';
+          var tempList = [];
+          var count = 0;
+          var totalfee = 0;
+          // 循环处理查询到的数据
+          for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            var amount = object.get("amount")
+            count += amount;
+            totalfee += object.get("price") * amount;
+            tempList[i] = checkUrl;
+          }
+          app.globalData.shopbadge = count;
+
+          console.log("totalfee:", totalfee);
+
+          that.setData({
+            orderList: results,
+            totalFee: totalfee,
+          })
+          console.log("orderList", that.data.orderList);
+
+
+        },
+        error: function (error) {
+          console.log("查询失败: " + error.code + " " + error.message);
+        }
+      });
+    
   },
 
   /**
@@ -282,14 +289,17 @@ Page({
             object.set("balance", balance);
             object.save(null, {
               success: function (object) {
-                
+
+                common.showModal("支付成功");
+
                 wx.redirectTo({
                   url: '../index/index',
                 })
                 var orderList = that.data.orderList;
                 console.log('更新余额成功,orderList', orderList);
-                
-                for (var order in orderList) {
+
+                for (var i = 0; i < orderList.length; i++) {
+                  var order = orderList[i];
                   console.log('order:', order);
 
                   order.destroy({
@@ -300,7 +310,7 @@ Page({
                       // 删除失败
                     }
                   })
-                  
+
                 }
 
               }, fail: function (error) {
