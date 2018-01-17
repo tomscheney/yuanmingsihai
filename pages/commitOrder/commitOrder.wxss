@@ -3,23 +3,29 @@
 .section {
   display: flex;
   flex-direction: column;
+  background: white;
 }
 
-/* 顶部cell */
+/* 顶部订单cell */
 
 .cell {
-  height: 100pt;
+  /* height: 100pt; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background: #f4f4f4;
+  border-bottom: 0.5rpx solid #f0f0f0;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 .cell-cover {
-  width: 90pt;
-  height: 75pt;
-  margin-right: 5px;
+  width: 100px;
+  height: 70px; 
+  margin-right: 15px;
+  margin-left: 10px;
 }
 
 .cell-introduce {
@@ -27,13 +33,14 @@
   flex-direction: column;
   width: 64%;
   height: 100%;
+  /* background: rebeccapurple; */
 }
 
 .cell-title {
   color: #444;
   font: PingFangSC-Light;
   font-size: 15px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .cell-description {
@@ -42,11 +49,39 @@
   font-size: 13px;
 }
 
-.cell-price {
+.cell-bottom{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.cell-bottom-price {
   color: #c90b0b;
   font: PingFangSC-Light;
   font-size: 15px;
+  margin-top: 0px;
+
 }
+.cell-bottom-amount{
+ font: PingFangSC-Light;
+ font-size: 13px;
+ color: #999;
+ margin-right: 0px; 
+ 
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ z-index: 0;
+ margin-bottom: 10px;
+}
+.cell-bottom-image{
+  width: 20px;
+  height: 20px;
+}
+
 
 /* 联系人cell */
 
@@ -132,7 +167,7 @@
  font: PingFangSC-Light;
  font-size: 13px;
  color: #999;
- margin-right: -50px;
+ margin-right: -60px;
  width: 180px;
  height: 30px;
  float: right;

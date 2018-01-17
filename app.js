@@ -62,7 +62,7 @@ App({
 
 
                 }, fail: function(object, error){
-                  console.log("查询失败:error",errror);
+                  console.log("查询失败:error",object,errror);
                  //如果没有查询到openid，则添加数据
 
                   var user = new User();

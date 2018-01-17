@@ -13,13 +13,56 @@ Page({
   data: {
     contactList: [{ head: '姓名', tail: '填写您的姓名' }, { head: '电话',tail: '请填写收货人手机号码' }, { head: '地址', tail: '请填写收货地址' }],
     paymethod: ['../images/dd_vip@2x.png','../images/dd_wx@2x.png'],
+    totalFee:0,
+    orderList:[],
+    username:'',
+    phoneNo:0,
+    address:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options",options);
+    
+    var that = this;
+    var Order = Bmob.Object.extend("Order");
+    var order = new Bmob.Query(Order);
+    var openid = app.globalData.openid;
+    order.equalTo("openid", openid);
+    // 查询所有数据
+    order.find({
+      success: function (results) {
+        console.log("共查询到 " + results.length + " 条记录");
+
+        var checkUrl = '../images/gwc_xz@2x.png';
+        var tempList = [];
+        var count = 0;
+        var totalfee = 0;
+        // 循环处理查询到的数据
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var amount = object.get("amount")
+          count += amount;
+          totalfee += object.get("price") * amount;
+          tempList[i] = checkUrl;
+        }
+        app.globalData.shopbadge = count;
+
+        console.log("totalfee:", totalfee);
+
+        that.setData({
+          orderList: results,
+          totalFee: totalfee,
+        })
+        console.log("totalfee:", that.data.orderList);
+
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
+
   },
 
   /**
@@ -133,5 +176,9 @@ Page({
      }
   
   },
+
+  commitOrder:function(){
+
+  }
 
 })

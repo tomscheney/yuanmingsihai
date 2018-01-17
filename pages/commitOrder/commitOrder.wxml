@@ -1,12 +1,18 @@
 <!--pages/commitOrder.wxml-->
 
 <view class='section'>
-  <view class='cell'>
-    <image class='cell-cover' src='http://bmob-cdn-15679.b0.upaiyun.com/2018/01/14/8a9cb752402bd61f801de5c9a467e738.png'></image>
+
+  <view class='cell' wx:for='{{orderList}}' wx:key='a'>
+    <image class='cell-cover' src='{{item.coverUrl}}' mode='aspectFit'></image>
     <view class='cell-introduce'>
-      <view class='cell-title'>雨前A级西湖龙井 100克</view>
-      <view class='cell-description'>净含量：100克</view>
-      <view class='cell-price'>¥1000</view>
+      <view class='cell-title'>{{item.name}}</view>
+      <view class='cell-description'>净含量：{{item.netContent}}</view>
+      <view class='cell-bottom'>
+        <view class='cell-bottom-price'>¥{{item.price}}</view>
+        <view class='cell-bottom-amount'>
+          <text>x{{item.amount}}</text>
+        </view>
+      </view>
     </view>
   </view>
 
@@ -24,14 +30,15 @@
         <text class='pay-balance' wx:if='{{index == 0}}'>扫描礼品卡二维码抵现</text>
         <image class='pay-tail' src='../images/dd_fh@2x.png' mode='aspectFit'></image>
       </view>
-      </view>
     </view>
-
   </view>
+  <view style='height:50px'></view>
 
-  <view class='bottom'>
-    <view class='bottom-amount' bindtap='addToshopCart'>合计
-      <text class='bottom-amount-text'> ￥{{'10000'}} </text>
-    </view>
-    <view class='bottom-settlement' bindtap='immediateBuy'>提交订单</view>
+</view>
+
+<view class='bottom'>
+  <view class='bottom-amount' bindtap='addToshopCart'>合计
+    <text class='bottom-amount-text'> ￥{{totalFee}} </text>
   </view>
+  <view class='bottom-settlement' bindtap='commitOrder'>提交订单</view>
+</view>

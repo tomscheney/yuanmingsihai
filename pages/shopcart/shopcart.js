@@ -14,6 +14,7 @@ Page({
 
     checkItemList: [],
     orderList: [],
+
   },
 
   /**
@@ -39,18 +40,20 @@ Page({
           var object = results[i];
           var amount = object.get("amount")
           count += amount;
-          totalfee += (parseInt(object.get("price")) * amount);
+          totalfee += object.get("price") * amount;
           tempList[i] = checkUrl;
         }
         app.globalData.shopbadge = count;
 
-        console.log("totalfee:",totalfee);
+        console.log("totalfee:", totalfee);
 
         that.setData({
           checkItemList: tempList,
           orderList: results,
           totalFee: totalfee,
         })
+        console.log("totalfee:", that.data.orderList);
+
       },
       error: function (error) {
         console.log("查询失败: " + error.code + " " + error.message);
@@ -64,48 +67,156 @@ Page({
     var index = e.currentTarget.dataset.index;
     var itemUrl = this.data.checkItemList[index];
     console.log("itemUrl:", itemUrl);
-    console.log("itemUrl:", itemUrl.substr(13, 3));
-    var totalfee = this.totalFee;
+    console.log("itemUrl:", itemUrl.substr(14, 3));
+    var totalfee = this.data.totalFee;
+
     var object = this.data.orderList[index];
+    totalfee -= (object.get('price') * object.get('amount'));
+    app.globalData.shopbadge -= object.get('amount');
+    this.data.orderList.splice(index,1);
 
-    if (itemUrl.substr(14, 3) == 'wxz') {
-      itemUrl = '../images/gwc_xz@2x.png';
-      totalfee -= (object.get('price') * object.get('amount'));
-      object.save(null, {
-        success: function (result) {
-          // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
-          console.log("添加成功, objectId:" + result.id);
-        },
-        error: function (result, error) {
-          // 添加失败
-          console.log('添加失败');
 
-        }
-      });
-    } else {
-      itemUrl = '../images/gwc_wxz@2x.png';
-      var count = app.globalData.shopbadge;
-      count--;
-      app.globalData.shopbadge = count;
-      object.destroy();
-    }
     this.data.checkItemList[index] = itemUrl;
-    var tempItemLiost = this.data.checkItemList;
+    var tempItemList = this.data.checkItemList;
     this.setData({
-      checkItemList: tempItemLiost,
+      checkItemList: tempItemList,
       totalFee: totalfee,
+      orderList: this.data.orderList,
     })
+    object.destroy({
+      success: function (myObject) {
+        // 删除成功
+        console.log("删除成功");
+      },
+      error: function (myObject, error) {
+        // 删除失败、
+        console.log("删除失败");
+
+      }
+    });
 
   },
 
   //结算
   clickSettlement: function () {
+    
     if (this.data.totalFee > 0) {
+      
       wx.navigateTo({
-        url: '../commitOrder/commitOrder?totalFee=' + this.totalFee,
+        url: '../commitOrder/commitOrder'
       })
     } else {
       common.showModal("还没有订单，快去选购产品吧！");
     }
-  }
+  },
+
+  //数量增加
+  bindTapPlus: function (e) {
+    var that = this;
+    var Order = Bmob.Object.extend("Order");
+    var query = new Bmob.Query(Order);
+    //对应opendid（用户），下的对应订单
+    var openid = app.globalData.openid;
+    query.equalTo("openid", openid);
+    var index = e.currentTarget.dataset.index;
+    var object = this.data.orderList[index];
+    var productid = object.get('productid')
+    query.equalTo("productid", productid);
+    query.first({
+
+      success: function (result) {
+        console.log("查询成功:result", result.get('amount'));
+        //更新订单数量
+        var amount = result.get('amount');
+        amount++;
+        result.set('amount', amount);
+        result.save();
+        object.set('amount', amount);
+        that.data.totalFee += object.get("price");
+
+        that.setData({
+          orderList:that.data.orderList,
+          totalFee:that.data.totalFee,
+        })
+      }, fail: function (object, error) {
+        console.log("订单查询失败:error", object, errror);
+      }
+    })
+
+  },
+  //数量减少
+  bindTapMinus: function (e) {
+    var that = this;
+    var Order = Bmob.Object.extend("Order");
+    var query = new Bmob.Query(Order);
+    //对应opendid（用户），下的对应订单
+    var openid = app.globalData.openid;
+    query.equalTo("openid", openid);
+
+    var index = e.currentTarget.dataset.index;
+    var object = this.data.orderList[index];
+    var productid = object.get('productid')
+    query.equalTo("productid", productid);
+    query.first({
+
+      success: function (result) {
+        console.log("查询成功:result", result.get('amount'));
+        //更新订单数量
+        var amount = result.get('amount');
+        amount--;
+        if (amount > 0) { 
+        result.set('amount', amount);
+        result.save();
+        object.set('amount',amount);
+        that.data.totalFee -= object.get("price");
+
+        that.setData({
+          orderList: that.data.orderList,
+          totalFee: that.data.totalFee,
+        })
+      } 
+
+    }, fail: function (object, error) {
+      console.log("订单查询失败:error", object, errror);
+    }
+    })
+  },
+//修改订单数量
+modifyOrderAmount: function(e) {
+  console.log("modifyOrderAmount:", e.detail.value);
+  var that = this;
+  var Order = Bmob.Object.extend("Order");
+  var query = new Bmob.Query(Order);
+  //对应opendid（用户），下的对应订单
+  var openid = app.globalData.openid;
+  query.equalTo("openid", openid);
+  var index = e.currentTarget.dataset.index;
+  var object = this.data.orderList[index];
+  var productid = object.get('productid')
+  query.equalTo("productid", productid);
+
+  query.first({
+
+    success: function (result) {
+      //更新订单数量
+      var amount = result.get('amount');
+      console.log("查询成功:result", result);
+      var value = parseInt(e.detail.value);
+      var d_value = amount - value;
+      result.set('amount', value);
+      result.save();
+      object.set('amount', value);
+      that.data.totalFee -= (object.get("price") * d_value);
+
+      that.setData({
+        orderList: that.data.orderList,
+        totalFee: that.data.totalFee,
+      })
+    }, fail: function (object, error) {
+      console.log("订单查询失败:error", object, errror);
+    }
+  })
+}
+
+
 })

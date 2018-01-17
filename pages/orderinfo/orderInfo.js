@@ -191,12 +191,40 @@ Page({
       },
       error: function (error) {
         console.log("查询失败: " + error.code + " " + error.message);
-        
+        //创建新表
+        var Order = Bmob.Object.extend("Order");
+        var order = new Order();
+        var openid = app.globalData.openid;
+        order.set("openid", openid);
+        order.set("productid", that.data.productid);
+        order.set("name", that.data.productName);
+        order.set("price", that.data.price);
+        order.set("coverUrl", that.data.coverUrl);
+        order.set("netContent", that.data.netContent);
+        order.set("description", that.data.description);
+        order.set("amount", 1);
+        //添加数据，第一个入口参数是null
+        order.save(null, {
+          success: function (result) {
+            // 添加成功，返回成功之后的objectId
+            //（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+            var count = app.globalData.shopbadge;
+            count += 1;
+            app.globalData.shopbadge = count;
+            console.log("count:", count);
+            common.showModal("添加购物车成功");
+
+          },
+          error: function (result, error) {
+            // 添加失败
+            console.log('创建订单失败', error);
+
+          }
+        });
 
       }
 
     })
-
     
   }
 

@@ -10,14 +10,16 @@
       <view class='cell-bottom'>
         <view class='cell-bottom-price'>¥{{item.price}}</view>
         <view class='cell-bottom-amount'>
-          <image  class='cell-bottom-image' src='../images/gwc_jian@2x.png' mode='aspectFit'  mode='aspectFit'></image>
-          <input class='cell-bottom-input' value='{{item.amount}}'></input>
-          <image class='cell-bottom-image' src='../images/gwc_jia@2x.png' mode='aspectFit'></image>
+          <image  class='cell-bottom-image' src='../images/gwc_minus.png' mode='aspectFit'  mode='aspectFit' bindtap='bindTapMinus' data-index='{{index}}'></image>
+          <input class='cell-bottom-input' value='{{item.amount}}' bindconfirm='modifyOrderAmount' data-index='{{index}}'></input>
+          <image class='cell-bottom-image' src='../images/gwc_plus.png' mode='aspectFit' bindtap='bindTapPlus' data-index='{{index}}'></image>
         </view>
       </view>
     </view>
 
   </view>
+
+<view style='height:50px'></view>
 
 
 </view>
