@@ -58,7 +58,6 @@ App({
                     result.set("province", userInfo['province']);
                     result.save();
                   }
-                  console.log('我有userInfo');
 
 
                 }, fail: function(object, error){
@@ -77,7 +76,6 @@ App({
                     user.set("language", userInfo['language']);
                     user.set("province", userInfo['province']);
 
-                    console.log('我有userInfo');
 
                   }
                   //添加数据，第一个入口参数是null

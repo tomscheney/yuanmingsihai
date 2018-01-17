@@ -10,7 +10,7 @@
             <view class="weui-label">跳转页面:</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" name="path" value="pages/index/index?query=10000000" placeholder="请输入链接地址" />
+            <input class="weui-input" name="path" value="10000000" placeholder="请输入卡号" />
           </view>
         </view>
       </view>     

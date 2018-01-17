@@ -14,7 +14,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     cardNO: '',
-    balance: '',
+    balance: 0,
     needAdd: false,
 
   },
@@ -65,15 +65,20 @@ Page({
 
           card.set("cardNO", that.data.cardNO);
           card.set("balance", that.data.balance);
+          card.set({"openid":app.globalData.openid});
           //添加数据，第一个入口参数是null
           card.save(null, {
             success: function (result) {
               // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
               console.log("创建成功, objectId:" + result);
+              common.showModal("卡片激活成功");
+
             },
             error: function (result, error) {
               // 添加失败
               console.log('创建失败');
+              common.showModal("卡片激活失败");
+
             }
           });
 
@@ -90,28 +95,17 @@ Page({
         console.log("扫码结果:", res.result);
         console.log("path:", res.path);
         if (res.path) {
-          var start = res.path.indexOf('query=');
-          var cardNO = res.path.substr(start + 6, 8);
+          
+          var cardNO = res.path;
 
           this.setData({
             cardNO: cardNO,
           });
-          console.log("cardNO", this.data.cardNO);
 
-          var balance = "0";
-          if (cardNO.slice(0, 4) == '1000') {
-            console.log("balance：", 1000);
-            balance = "1000";
-          } else if (cardNO.slice(0, 4) == '3000') {
-            console.log("balance：", 3000);
-            balance = "3000";
-          }
-          else if (cardNO.slice(0, 4) == '5000') {
-            console.log("balance：", 5000);
-            balance = "5000";
-          }
+          var balance = cardNO.slice(0, 4);
+          
           this.setData({
-            balance: balance,
+            balance: parseInt(balance),
           });
 
           var that = this;
@@ -125,10 +119,13 @@ Page({
               // 查询成功，不需要添加
               if (result) {
                 console.log("查询成功:", result);
-
+                common.showModal("此卡已在数据库中，无需激活");
                 that.setData({
                   balance:result.get('balance'),
                 });
+                //更新openid
+                result.set("openid",app.globalData.openid);
+                result.save();
               } else {
                 console.log("cardNO", that.data.cardNO);
 
@@ -147,8 +144,6 @@ Page({
               });
             }
           });
-
-
           
 
         }
