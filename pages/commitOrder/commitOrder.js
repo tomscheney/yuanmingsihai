@@ -18,6 +18,7 @@ Page({
     username:'',
     phoneNo:0,
     address:'',
+    cardAmount:0,
   },
 
   /**
@@ -179,6 +180,18 @@ Page({
 
   commitOrder:function(){
 
+  },
+  inputInfo:function(e){
+    var index = e.currentTarget.dataset.index;
+    var value = e.detail.value;
+    if(index == 0){
+      this.data.username = value;
+    } else if(index == 1){
+      this.data.phoneNo = value;
+
+    } else if(index == 2){
+      this.data.address = value;
+    }
   }
 
 })

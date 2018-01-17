@@ -19,7 +19,7 @@
   <view class='contact'>
     <view class='contact-cell' wx:for="{{[{head:'姓名',tail:'填写您的姓名'},{head:'电话',tail:'请填写收货人手机号码'},{head:'地址',tail:'请填写收货地址'}]}}" wx:key='a'>
       <view class='contact-cell-head'>{{item.head}}</view>
-      <input class='contact-cell-tail' placeholder='{{item.tail}}' placeholder-class="phcolor">{{item.tail}}</input>
+      <input class='contact-cell-tail' placeholder='{{item.tail}}' placeholder-class="phcolor" bindconfirm='inputInfo' data-index='{{index}}'>{{item.tail}}</input>
     </view>
 
     <view class='pay-title'> 选择付款方式 </view>
@@ -27,7 +27,12 @@
       <view class='pay-cell' data-index='{{index}}' bindtap='bindPayTap'>
         <view class='pay-mothod'>{{item}}</view>
         <image class='pay-icon' src='{{paymethod[index]}}' mode='aspectFit'></image>
-        <text class='pay-balance' wx:if='{{index == 0}}'>扫描礼品卡二维码抵现</text>
+        <block wx:if='{{cardAmount == 0}}'>
+          <text class='pay-balance' wx:if='{{index == 0}}'>扫描礼品卡二维码抵现</text>
+        </block>
+         <block wx:else='{{cardAmount == 0}}'>
+          <text class='pay-balance' style='color:#C90B0B' wx:if='{{index == 0}}'>¥{{cardAmount}}</text>
+        </block>
         <image class='pay-tail' src='../images/dd_fh@2x.png' mode='aspectFit'></image>
       </view>
     </view>
