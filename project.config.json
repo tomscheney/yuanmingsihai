@@ -20,14 +20,18 @@
 			"current": -1,
 			"list": []
 		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": -1,
 			"list": [
 				{
 					"id": 0,
-					"name": "just do it",
+					"name": "无path",
 					"pathName": "pages/index/index",
-					"query": "query=10001111",
+					"query": "1000 0000",
 					"scene": "1011"
 				}
 			]

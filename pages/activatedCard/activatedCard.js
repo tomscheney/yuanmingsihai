@@ -96,16 +96,23 @@ Page({
         console.log("path:", res.path);
         if (res.path) {
           
-          var cardNO = res.path;
+         
+          var index = res.path.indexOf("=");
+          console.log("index",index);
+          var cardNO = res.path.substr(index + 1,9);
+          console.log("cardNO", cardNO);
+          
+          var balance = parseInt(cardNO.slice(0, 4));
+
+          if (cardNO.length == 8 && balance%1000 == 0){
 
           this.setData({
             cardNO: cardNO,
           });
 
-          var balance = cardNO.slice(0, 4);
           
           this.setData({
-            balance: parseInt(balance),
+            balance: balance,
           });
 
           var that = this;
@@ -144,11 +151,21 @@ Page({
               });
             }
           });
+
+          } else {
+ 
+            common.showModal('此二维码无效');
+
+
+          }
           
 
         }
+
       }
+      
     })
+    
   },
 
   

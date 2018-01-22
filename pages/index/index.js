@@ -26,10 +26,7 @@ Page({
    var Tea = Bmob.Object.extend("Tea");
 
    var tempList = this.data.products[column];
-   console.log('column：', column);
-   console.log('index：', e);
-
-   console.log('row：', row);
+  
 
    var object = tempList[row];
    var productid = object.id;
@@ -37,13 +34,12 @@ Page({
       url: '../orderinfo/orderInfo?productid=' + productid,
     })
 
-    console.log('我是object:', productid);
  
   },
   onLoad: function (e) {
     
-    this.iconbadge = app.globalData.shopbadge;
 
+    this.iconbadge = app.globalData.shopbadge;
     //监听购物车数量变化
     var that = this;
     Object.defineProperty(app.globalData, 'shopbadge', {
@@ -62,7 +58,7 @@ Page({
   },
 
   selectPriceGrade: function (e) {
-    console.log(e.currentTarget.dataset.index)
+
     var index = e.currentTarget.dataset.index;
     this.setData({
       selectIndex: index
@@ -96,7 +92,7 @@ Page({
     // 查询所有数据
     tea.find({
       success: function (results) {
-        console.log("共查询到 " + results.length + " 条记录");
+
         // 循环处理查询到的数据
         var list = [];
         for (var i = 0; i < results.length / 2; i++) {
@@ -108,10 +104,8 @@ Page({
             temp.push(nextObject);
           }
           list.push(temp);
-          console.log('object.id', object.id)
 
         }
-        console.log('results', results)
 
         that.setData({
           products: list

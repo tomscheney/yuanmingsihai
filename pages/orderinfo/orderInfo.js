@@ -27,9 +27,6 @@ Page({
    */
   onLoad: function (options) {
 
-
-    console.log("options:", options.productid);
-
     var productid = options.productid;
     this.setData({
       productid: productid,
@@ -48,7 +45,7 @@ Page({
         var introduceImageUrl = result.get("introduceImageUrl");
         var netContent = result.get("netContent");
         var description = result.get("description");
-        console.log("xxxresult:",result);;
+
         that.setData({
           coverUrl: coverUrl,
           productName: productName,
@@ -57,7 +54,7 @@ Page({
           netContent: netContent,
           description: description,
         })
-        console.log("result:", result);
+
       },
       error: function (object, error) {
         // 查询失败
@@ -168,11 +165,11 @@ Page({
     var query = new Bmob.Query(Order);
     query.equalTo("openid", app.globalData.openid);
     query.equalTo("productid", this.data.productid);
-    console.log("productid:", this.data.productid);
+
 
     query.find({
       success: function (results) {
-        console.log("results",results);
+
        if(results.length > 0){
          var object = results[0];
          var amount = object.get('amount');
@@ -183,9 +180,8 @@ Page({
          object.set("amount", amount);
          object.save();
 
-         console.log("amount:", amount);
          common.showModal("添加购物车成功");
-         console.log(typeof object);
+
        } else {
 
          //新建订单
@@ -207,7 +203,7 @@ Page({
              var count = app.globalData.shopbadge;
              count += 1;
              app.globalData.shopbadge = count;
-             console.log("count:", count);
+
              common.showModal("添加购物车成功");
 
            },
@@ -244,7 +240,7 @@ Page({
             var count = app.globalData.shopbadge;
             count += 1;
             app.globalData.shopbadge = count;
-            console.log("count:", count);
+
             common.showModal("添加购物车成功");
 
           },

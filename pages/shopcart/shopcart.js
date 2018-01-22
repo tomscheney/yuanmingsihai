@@ -29,7 +29,7 @@ Page({
     // 查询所有数据
     order.find({
       success: function (results) {
-        console.log("共查询到 " + results.length + " 条记录");
+
 
         var checkUrl = '../images/gwc_xz@2x.png';
         var tempList = [];
@@ -45,14 +45,14 @@ Page({
         }
         app.globalData.shopbadge = count;
 
-        console.log("totalfee:", totalfee);
+
 
         that.setData({
           checkItemList: tempList,
           orderList: results,
           totalFee: totalfee,
         })
-        console.log("totalfee:", that.data.orderList);
+
 
       },
       error: function (error) {
@@ -66,8 +66,8 @@ Page({
 
     var index = e.currentTarget.dataset.index;
     var itemUrl = this.data.checkItemList[index];
-    console.log("itemUrl:", itemUrl);
-    console.log("itemUrl:", itemUrl.substr(14, 3));
+   
+   
     var totalfee = this.data.totalFee;
 
     var object = this.data.orderList[index];
@@ -125,7 +125,7 @@ Page({
     query.first({
 
       success: function (result) {
-        console.log("查询成功:result", result.get('amount'));
+
         //更新订单数量
         var amount = result.get('amount');
         amount++;
@@ -160,7 +160,7 @@ Page({
     query.first({
 
       success: function (result) {
-        console.log("查询成功:result", result.get('amount'));
+
         //更新订单数量
         var amount = result.get('amount');
         amount--;
@@ -183,7 +183,7 @@ Page({
   },
 //修改订单数量
 modifyOrderAmount: function(e) {
-  console.log("modifyOrderAmount:", e.detail.value);
+
   var that = this;
   var Order = Bmob.Object.extend("Order");
   var query = new Bmob.Query(Order);
@@ -200,7 +200,7 @@ modifyOrderAmount: function(e) {
     success: function (result) {
       //更新订单数量
       var amount = result.get('amount');
-      console.log("查询成功:result", result);
+
       var value = parseInt(e.detail.value);
       var d_value = amount - value;
       result.set('amount', value);

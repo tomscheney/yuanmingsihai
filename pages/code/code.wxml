@@ -26,7 +26,7 @@
       <image class="weui-code"  src="{{imageUrl}}" />
     </view>
     <view class="weui-dialog__ft">
-      <view  class="weui-dialog__btn weui-dialog__btn_primary" bindtap="previewImage">长按图片保存</view>
+      <view  class="weui-dialog__btn weui-dialog__btn_primary" bindtap="saveImage">保存图片</view>
     </view>
   </view>
 </view>

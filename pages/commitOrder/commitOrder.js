@@ -29,51 +29,56 @@ Page({
   onLoad: function (options) {
 
     var productid = options.productid;
-
-   
-
-      var that = this;
-      var Order = Bmob.Object.extend("Order");
-      var order = new Bmob.Query(Order);
-      var openid = app.globalData.openid;
-      order.equalTo("openid", openid);
-      if (productid) {
-        order.equalTo("productid", productid);
-      }
-      // 查询所有数据
-      order.find({
-        success: function (results) {
-          console.log("共查询到 " + results.length + " 条记录");
-
-          var checkUrl = '../images/gwc_xz@2x.png';
-          var tempList = [];
-          var count = 0;
-          var totalfee = 0;
-          // 循环处理查询到的数据
-          for (var i = 0; i < results.length; i++) {
-            var object = results[i];
-            var amount = object.get("amount")
-            count += amount;
-            totalfee += object.get("price") * amount;
-            tempList[i] = checkUrl;
-          }
-          app.globalData.shopbadge = count;
-
-          console.log("totalfee:", totalfee);
-
-          that.setData({
-            orderList: results,
-            totalFee: totalfee,
-          })
-          console.log("orderList", that.data.orderList);
+    this.setData({
+      productid : productid,
+    })
 
 
-        },
-        error: function (error) {
-          console.log("查询失败: " + error.code + " " + error.message);
+    var that = this;
+    var Order = Bmob.Object.extend("Order");
+    var order = new Bmob.Query(Order);
+    var openid = app.globalData.openid;
+    order.equalTo("openid", openid);
+    if (productid) {
+      order.equalTo("productid", productid);
+    }
+    // 查询所有数据
+    order.find({
+      success: function (results) {
+        console.log("共查询到 " + results.length + " 条记录");
+
+        var checkUrl = '../images/gwc_xz@2x.png';
+        var tempList = [];
+        var count = 0;
+        var totalfee = 0;
+        // 循环处理查询到的数据
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var amount = object.get("amount")
+          count += amount;
+          totalfee += object.get("price") * amount;
+          tempList[i] = checkUrl;
+          console.log("object:", object);
+          that.data.productList.push(object.get("productid"));
         }
-      });
-    
+        
+
+        console.log("totalfee:", totalfee);
+
+        that.setData({
+          orderList: results,
+          totalFee: totalfee,
+          productList: that.data.productList,
+        })
+        console.log("orderList", that.data.orderList);
+
+
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
+
   },
 
   /**
@@ -101,7 +106,25 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    var orderList = this.data.orderList;
+    if (this.data.productid) {
+      for (var i = 0; i < orderList.length; i++) {
+        var order = orderList[i];
+        console.log('order:', order);
 
+        order.destroy({
+          success: function (myObject) {
+            // 删除成功
+            console.log('删除成功')
+          },
+          error: function (myObject, error) {
+            // 删除失败
+            console.log('删除失败')
+          }
+        })
+
+      }
+    }
   },
 
   /**
@@ -134,19 +157,22 @@ Page({
           success: (res) => {
             console.log("card:", res);
             //得到卡号
-            var value = res.path.replace(/\s+/g, "");
+            var index = res.path.indexOf("=");
+            console.log("index", index);
+            var cardNO = res.path.substr(index + 1, 9);
+            console.log("cardNO", cardNO);
+            
 
-            if (value.length == 8) {
+            if (cardNO.length == 8) {
 
               that.setData({
-                cardNO: value,
+                cardNO: cardNO,
               })
               console.log("cardNO:", that.data.cardNO);
 
               //查询数据库
               var Card = Bmob.Object.extend("Card");
               var query = new Bmob.Query(Card);
-              query.equalTo("openid", app.globalData.openid);
               query.equalTo("cardNO", that.data.cardNO);
               query.first({
                 success: function (object) {
@@ -155,9 +181,12 @@ Page({
                     // 查询成功
                     var balance = object.get("balance");
                     that.setData({
-                      cardBalance: balance,
+                      cardBalance: (balance + that.data.cardBalance),
                     })
                     console.log("balance:", balance);
+                   if ( balance <= 0 ){
+                     common.showModal("此卡余额不足支付")
+                   }
                   } else {
                     common.showModal("此卡不存在或未激活，请联系发卡商家")
                   }
@@ -181,7 +210,7 @@ Page({
 
         console.log("openid:", openid);
 
-        Bmob.Pay.wechatPay(0.01, '名称1', '描述', openid).then(function (resp) {
+        Bmob.Pay.wechatPay(this.data.totalFee, '茶叶', '缘茗四海', openid).then(function (resp) {
           console.log('resp');
           console.log(resp);
 
@@ -220,7 +249,7 @@ Page({
 
         }, function (err) {
           console.log('服务端返回失败');
-          common.showTip(err.message, 'loading', {}, 6000);
+          common.showTip(err.message, 'loading', {}, 3000);
           console.log(err);
         });
       }
@@ -235,7 +264,7 @@ Page({
     var openid = app.globalData.openid;
     order.set("openid", openid);
     order.set("totalFee", this.data.totalFee);
-    order.set("productList", this.data.productList);
+    order.set("productList", this.data.productList.tostring);
     order.set("phoneNo", this.data.phoneNo);
     order.set("address", this.data.address);
     order.set("username", this.data.username);
@@ -277,7 +306,7 @@ Page({
         //更新卡余额
         var Card = Bmob.Object.extend("Card");
         var query = new Bmob.Query(Card);
-        query.equalTo("openid", app.globalData.openid);
+
         query.equalTo("cardNO", that.data.cardNO);
         query.first({
           success: function (object) {
@@ -289,13 +318,15 @@ Page({
             object.set("balance", balance);
             object.save(null, {
               success: function (object) {
-
-                common.showModal("支付成功");
+                
+                that.sendMessage();
+                common.showTip('支付成功', '', {}, 3000);
 
                 wx.redirectTo({
                   url: '../index/index',
                 })
                 var orderList = that.data.orderList;
+                
                 console.log('更新余额成功,orderList', orderList);
 
                 for (var i = 0; i < orderList.length; i++) {
@@ -305,9 +336,12 @@ Page({
                   order.destroy({
                     success: function (myObject) {
                       // 删除成功
+                      console.log('删除成功')
                     },
                     error: function (myObject, error) {
                       // 删除失败
+                      console.log('删除失败')
+
                     }
                   })
 
@@ -343,6 +377,32 @@ Page({
     } else if (index == 2) {
       this.data.address = value;
     }
+  },
+
+  sendMessage:function(){
+
+    var content = "老板您好，用户:" + this.data.username + "  通过小程序在平台下单了，请到bmob后台查看，请及时发货！"
+    Bmob.Sms.requestSms({ "mobilePhoneNumber": "15110203093", "content": content }).then(function (obj) {
+      
+      console.log('短信发送成功');
+    }, function (err) {
+      console.log('短信发送失败');
+
+    });
+
+
+    var that = this;
+    
+    content = "亲爱的客户您好，您在平台的订单我们已经收到，我们会及时发货，若有疑问，请根据贵宾卡后的联系方式，联系我们！\n 缘茗四海"
+    Bmob.Sms.requestSmsCode({ "mobilePhoneNumber": that.data.phoneNo, "template": "订单提示" }).then(function (obj) {
+
+      console.log('客户短信发送成功',obj);
+    }, function (err) {
+      console.log('客户短信发送失败',err);
+
+    });
+
   }
+  
 
 })
