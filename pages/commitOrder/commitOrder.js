@@ -22,6 +22,7 @@ Page({
     cardBalance: 0,//卡余额
     cardNO: '',//卡号
     paymethod: 0,//默认卡（0）支付，微信支付（1）.
+    cardList: [],//卡支付列表
   },
 
   /**
@@ -33,7 +34,6 @@ Page({
     this.setData({
       productid: productid,
     })
-
 
     var that = this;
     var Order = Bmob.Object.extend("Order");
@@ -183,13 +183,26 @@ Page({
                   if (object) {
                     // 查询成功
                     var balance = object.get("balance");
-                    that.setData({
-                      cardBalance: (balance + that.data.cardBalance),
-                    })
-                    console.log("balance:", balance);
-                    if (balance <= 0) {
-                      common.showModal("此卡余额不足支付")
+                    
+                    if (balance > 0) {
+                      that.data.cardList.push(cardNO);
+                      that.setData({
+                        cardBalance: (balance + that.data.cardBalance),
+                      })
+                      console.log("balance:", balance);
+                      if (that.data.cardBalance < that.data.totalFee) {
+                        var wxPayFee = that.data.totalFee - that.data.cardBalance;
+
+                        common.showModal("此卡余额不足支付，需微信支付¥" + wxPayFee);
+                      }
+                    } else {
+
+                      common.showModal("此卡余额不足")
+
                     }
+
+
+
                   } else {
                     common.showModal("此卡不存在或未激活，请联系发卡商家")
                   }
@@ -206,7 +219,7 @@ Page({
 
           }
         })
-      }break;
+      } break;
       case 1: {
         common.showModal("已为您切换为微信支付")
         this.data.paymethod = 1;
@@ -231,19 +244,18 @@ Page({
       common.showModal("请填写正确的地址");
       return;
     }
-    if (this.data.totalFee >= this.data.cardBalance && this.data.paymethod == 0) {
-      common.showModal("卡余额不足，请换卡或者微信支付");
-      return;
-    }
+    
+    
 
     //传参数金额，名称，描述,openid
 
     var openid = app.globalData.openid;
 
     console.log("openid:", openid);
-    var that = this;
 
-    Bmob.Pay.wechatPay(this.data.totalFee, '茶叶', '缘茗四海', openid).then(function (resp) {
+    var wxPayFee = this.data.totalFee - this.data.cardBalance;
+    var that = this;
+    Bmob.Pay.wechatPay(wxPayFee, '茶叶', '缘茗四海', openid).then(function (resp) {
       console.log('resp');
       console.log(resp);
 
@@ -303,6 +315,9 @@ Page({
     order.set("address", this.data.address);
     order.set("username", this.data.username);
     order.set("orderId", this.data.orderId);
+    var wxPayFee = this.data.totalFee - this.data.cardBalance;
+    order.set("wxPayFee", wxPayFee);
+    order.set("cardList", that.data.cardList);
 
     //添加数据，第一个入口参数是null
     order.save(null, {
@@ -324,6 +339,9 @@ Page({
               if (object) {
 
                 var balance = that.data.cardBalance - that.data.totalFee;
+                if(balance < 0) {
+                  balance = 0;
+                }
                 console.log('余额', balance);
 
                 object.set("balance", balance);
@@ -362,7 +380,7 @@ Page({
                     console.log('更新余额失败', error);
                   }
                 })
-              } 
+              }
 
             },
             error: function (error) {
