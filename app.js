@@ -30,13 +30,13 @@ App({
 
 
               //指定用户，跳转激活页面
-              // if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
+              if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
 
                 wx.redirectTo({
                   url: "/pages/activatedCard/activatedCard",
                 })
 
-              // }
+              }
 
               var User = Bmob.Object.extend("user");
               //创建查询对象，入口参数是对象类的实例
