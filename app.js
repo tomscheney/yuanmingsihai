@@ -28,7 +28,7 @@ App({
               var openid = result.openid;
               that.globalData.openid = openid;
 
-
+              console.log('openid',openid);
               //指定用户，跳转激活页面
               if (openid == "odW8G0VeIAvW9FAicai0ePKVBTGI") {
 
@@ -46,9 +46,11 @@ App({
               query.first({
                 success: function(result){
 
-                  //更新用户数据
-                  
                   var userInfo = that.globalData.userInfo;
+
+                  //更新用户数据
+                  console.log("我有值", userInfo);
+
                   if (userInfo) {
                     result.set("username", userInfo['nickName']);
                     result.set("gender", userInfo['gender']);
@@ -57,7 +59,17 @@ App({
                     result.set("country", userInfo['country']);
                     result.set("language", userInfo['language']);
                     result.set("province", userInfo['province']);
-                    result.save();
+                    result.save(null, {
+                      success: function (result) {
+                        // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                        console.log("添加用户成功, objectId:" + result.id);
+                      },
+                      error: function (result, error) {
+                        // 添加失败
+                        console.log('添加用户失败');
+
+                      }
+                    });;
                   }
 
 
@@ -68,6 +80,7 @@ App({
                   var user = new User();
                   user.set("openid", openid);
                   var userInfo = that.globalData.userInfo;
+
                   if (userInfo) {
                     user.set("username", userInfo['nickName']);
                     user.set("gender", userInfo['gender']);
@@ -164,7 +177,17 @@ App({
                   result.set("country", userInfo['country']);
                   result.set("language", userInfo['language']);
                   result.set("province", userInfo['province']);
-                  result.save();
+                  result.save(null, {
+                    success: function (result) {
+                      // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                      console.log("新增用户成功");
+                    },
+                    error: function (result, error) {
+                      // 添加失败
+                      console.log("新增用户失败");
+
+                    }
+                  });
 
 
                 }, fail: function (object, error) {
@@ -181,7 +204,17 @@ App({
                   user.set("country", userInfo['country']);
                   user.set("language", userInfo['language']);
                   user.set("province", userInfo['province']);
-                  user.save();
+                  user.save(null, {
+                    success: function (result) {
+                      // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                      console.log("新增用户成功");
+                    },
+                    error: function (result, error) {
+                      // 添加失败
+                      console.log("新增用户失败");
+
+                    }
+                  });
 
                 }
               });

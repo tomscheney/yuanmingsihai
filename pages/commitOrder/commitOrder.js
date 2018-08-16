@@ -254,6 +254,10 @@ Page({
     console.log("openid:", openid);
 
     var wxPayFee = this.data.totalFee - this.data.cardBalance;
+    if (wxPayFee < 0){
+      this.createOrder("card pay.");
+      return;
+    }
     var that = this;
     Bmob.Pay.wechatPay(wxPayFee, '茶叶', '缘茗四海', openid).then(function (resp) {
       console.log('resp');
